@@ -188,10 +188,43 @@
     <!-- Admin Panel -->
     <section id="admin" class="section-content hidden">
         <div class="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Painel Administrativo</h2>
-            
-            <!-- Add Property Form -->
-            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8">
+            <!-- Login Form -->
+            <div id="adminLogin" class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">🔐 Acesso Restrito</h2>
+                <p class="text-center text-gray-600 mb-6">Digite a senha para acessar o painel administrativo</p>
+                
+                <form id="loginForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Senha do Administrador</label>
+                        <input type="password" id="adminPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" placeholder="Digite a senha" required>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-base">
+                        🚪 Entrar no Painel
+                    </button>
+                </form>
+                
+                <div class="mt-6 p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                    <h4 class="font-bold text-yellow-800 mb-2">🔑 Senha Padrão:</h4>
+                    <p class="text-sm text-yellow-700"><strong>admin123</strong></p>
+                    <p class="text-xs text-yellow-600 mt-2">⚠️ Altere esta senha no código para maior segurança!</p>
+                </div>
+                
+                <div id="loginError" class="hidden mt-4 p-3 bg-red-50 rounded-lg border-l-4 border-red-500">
+                    <p class="text-red-700 text-sm">❌ Senha incorreta! Tente novamente.</p>
+                </div>
+            </div>
+
+            <!-- Admin Panel Content (Hidden until login) -->
+            <div id="adminContent" class="hidden">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">Painel Administrativo</h2>
+                    <button onclick="logoutAdmin()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors text-sm font-medium">
+                        🚪 Sair
+                    </button>
+                </div>
+                
+                <!-- Add Property Form -->
+                <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8">
                 <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-800">Adicionar Novo Imóvel</h3>
                 <form id="propertyForm" class="space-y-4 sm:space-y-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -282,104 +315,7 @@
                 </form>
             </div>
 
-            <!-- GitHub Instructions -->
-            <div class="max-w-4xl mx-auto mt-12 bg-green-50 rounded-lg p-6">
-                <h3 class="text-2xl font-bold mb-4 text-green-800">🚀 Como Colocar no GitHub (PASSO A PASSO)</h3>
-                <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-lg border-l-4 border-green-500">
-                        <h4 class="font-bold text-green-700 mb-2">1️⃣ Criar Conta no GitHub</h4>
-                        <p class="text-sm text-gray-700">• Acesse <strong>github.com</strong> e clique em "Sign up"</p>
-                        <p class="text-sm text-gray-700">• Escolha um nome de usuário (ex: joao-imoveis)</p>
-                    </div>
-                    
-                    <div class="bg-white p-4 rounded-lg border-l-4 border-blue-500">
-                        <h4 class="font-bold text-blue-700 mb-2">2️⃣ Criar Repositório</h4>
-                        <p class="text-sm text-gray-700">• Clique no botão verde "New" ou "+"</p>
-                        <p class="text-sm text-gray-700">• Nome do repositório: <strong>meu-site-imoveis</strong></p>
-                        <p class="text-sm text-gray-700">• Marque "Public" e "Add a README file"</p>
-                    </div>
-                    
-                    <div class="bg-white p-4 rounded-lg border-l-4 border-purple-500">
-                        <h4 class="font-bold text-purple-700 mb-2">3️⃣ Adicionar o Código</h4>
-                        <p class="text-sm text-gray-700">• Clique em "Add file" → "Create new file"</p>
-                        <p class="text-sm text-gray-700">• Nome do arquivo: <strong>index.html</strong></p>
-                        <p class="text-sm text-gray-700">• Cole TODO o código HTML desta página</p>
-                        <p class="text-sm text-gray-700">• Clique em "Commit new file"</p>
-                    </div>
-                    
-                    <div class="bg-white p-4 rounded-lg border-l-4 border-orange-500">
-                        <h4 class="font-bold text-orange-700 mb-2">4️⃣ Ativar GitHub Pages</h4>
-                        <p class="text-sm text-gray-700">• Vá em "Settings" (no seu repositório)</p>
-                        <p class="text-sm text-gray-700">• Role até "Pages" no menu lateral</p>
-                        <p class="text-sm text-gray-700">• Em "Source" escolha "Deploy from a branch"</p>
-                        <p class="text-sm text-gray-700">• Selecione "main" e clique "Save"</p>
-                    </div>
-                    
-                    <div class="bg-white p-4 rounded-lg border-l-4 border-red-500">
-                        <h4 class="font-bold text-red-700 mb-2">5️⃣ Seu Site Estará Online!</h4>
-                        <p class="text-sm text-gray-700">• URL será: <strong>seuusuario.github.io/meu-site-imoveis</strong></p>
-                        <p class="text-sm text-gray-700">• Demora 5-10 minutos para ficar disponível</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Canva Integration Instructions -->
-            <div class="max-w-4xl mx-auto mt-8 bg-yellow-50 rounded-lg p-6">
-                <h3 class="text-2xl font-bold mb-4 text-yellow-800">🎨 Sobre "Usar em um Design" no Canva</h3>
-                <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-lg">
-                        <h4 class="font-bold text-yellow-700 mb-2">❌ O que acontece se clicar:</h4>
-                        <p class="text-sm text-gray-700">• Você PERDE todo o trabalho feito aqui</p>
-                        <p class="text-sm text-gray-700">• O código vira uma imagem estática no Canva</p>
-                        <p class="text-sm text-gray-700">• Não funciona mais como site interativo</p>
-                    </div>
-                    
-                    <div class="bg-white p-4 rounded-lg">
-                        <h4 class="font-bold text-green-700 mb-2">✅ Como salvar seu trabalho:</h4>
-                        <p class="text-sm text-gray-700">• <strong>ANTES</strong> de clicar em qualquer coisa, copie TODO o código</p>
-                        <p class="text-sm text-gray-700">• Cole em um arquivo .txt no seu computador</p>
-                        <p class="text-sm text-gray-700">• Ou melhor ainda: coloque no GitHub primeiro!</p>
-                    </div>
-                    
-                    <div class="bg-white p-4 rounded-lg">
-                        <h4 class="font-bold text-blue-700 mb-2">🔄 Como voltar aqui depois:</h4>
-                        <p class="text-sm text-gray-700">• Abra uma nova conversa comigo</p>
-                        <p class="text-sm text-gray-700">• Diga: "Tenho um código de site de imóveis, quero continuar editando"</p>
-                        <p class="text-sm text-gray-700">• Cole o código que salvou</p>
-                        <p class="text-sm text-gray-700">• Eu vou recriar tudo exatamente como estava!</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hosting Instructions -->
-            <div class="max-w-4xl mx-auto mt-8 bg-blue-50 rounded-lg p-6">
-                <h3 class="text-2xl font-bold mb-4 text-blue-800">📡 Outras Opções de Hospedagem</h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-semibold text-blue-700 mb-3">🌐 Hospedagem Gratuita:</h4>
-                        <ul class="space-y-2 text-sm text-blue-600">
-                            <li>• <strong>GitHub Pages:</strong> ✅ RECOMENDADO - Grátis</li>
-                            <li>• <strong>Netlify:</strong> netlify.com - Mais fácil</li>
-                            <li>• <strong>Vercel:</strong> vercel.com - Deploy automático</li>
-                            <li>• <strong>Firebase Hosting:</strong> Google Cloud</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-blue-700 mb-3">📊 Rastreamentos Configurados:</h4>
-                        <ul class="space-y-2 text-sm text-blue-600">
-                            <li>• <strong>Ver Imóvel:</strong> Rastreia quando clica "Ver Detalhes"</li>
-                            <li>• <strong>Contato:</strong> Rastreia cliques em "Entrar em Contato"</li>
-                            <li>• <strong>WhatsApp:</strong> Rastreia cliques no botão flutuante</li>
-                            <li>• <strong>Adicionar Imóvel:</strong> Rastreia quando corretor adiciona</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mt-4 p-4 bg-yellow-50 rounded border-l-4 border-yellow-500">
-                    <p class="text-sm text-gray-700">
-                        <strong>📱 WhatsApp:</strong> Troque "5511999999999" pelo seu número com código do país (55 + DDD + número).
-                    </p>
-                </div>
-            </div>
 
             <!-- Properties Management -->
             <div class="max-w-4xl mx-auto mt-12">
@@ -425,8 +361,11 @@
                         <div class="p-3 sm:p-4 bg-blue-50 rounded-lg">
                             <h4 class="font-semibold text-blue-800 mb-2 text-sm sm:text-base">Interessado?</h4>
                             <p class="text-blue-600 mb-3 text-sm sm:text-base">Entre em contato conosco para mais informações!</p>
-                            <button onclick="trackContactClick()" class="w-full sm:w-auto bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-blue-700 transition-colors text-base sm:text-lg font-medium">
-                                📞 Entrar em Contato
+                            <button onclick="trackContactClick()" class="w-full sm:w-auto bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-green-700 transition-colors text-base sm:text-lg font-medium flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                                </svg>
+                                WhatsApp
                             </button>
                         </div>
                     </div>
@@ -607,7 +546,7 @@
                     renderProperties(filteredProperties, 'vendaGrid');
                     break;
                 case 'admin':
-                    loadAdminProperties();
+                    checkAdminLogin();
                     break;
             }
         }
@@ -711,6 +650,56 @@
         function closeModal() {
             document.getElementById('propertyModal').classList.add('hidden');
         }
+
+        // Admin login functions
+        function checkAdminLogin() {
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            if (isLoggedIn === 'true') {
+                showAdminContent();
+            } else {
+                showAdminLogin();
+            }
+        }
+
+        function showAdminLogin() {
+            document.getElementById('adminLogin').classList.remove('hidden');
+            document.getElementById('adminContent').classList.add('hidden');
+            document.getElementById('loginError').classList.add('hidden');
+        }
+
+        function showAdminContent() {
+            document.getElementById('adminLogin').classList.add('hidden');
+            document.getElementById('adminContent').classList.remove('hidden');
+            loadAdminProperties();
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('adminLoggedIn');
+            showAdminLogin();
+            // Limpar formulário
+            document.getElementById('propertyForm').reset();
+            document.getElementById('photoPreview').innerHTML = '';
+            document.getElementById('thumbnailPreview').innerHTML = '';
+            currentPhotos = [];
+            updatePhotoCount();
+        }
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            const correctPassword = 'admin123'; // ALTERE ESTA SENHA!
+            
+            if (password === correctPassword) {
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                showAdminContent();
+                document.getElementById('adminPassword').value = '';
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminPassword').focus();
+            }
+        });
 
         // Admin functions
         function loadAdminProperties() {
@@ -1034,6 +1023,9 @@
                     'event_label': 'contact_button'
                 });
             }
+            
+            // Abrir WhatsApp
+            window.open('https://wa.me/5511999999999?text=Olá! Vi um imóvel no site e gostaria de mais informações.', '_blank');
         }
 
         function trackWhatsAppClick() {
@@ -1065,5 +1057,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b87fed07815285',t:'MTc1NDU4NzgwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b8a70f80ef195d',t:'MTc1NDU4OTQwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
