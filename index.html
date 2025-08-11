@@ -191,11 +191,15 @@
             <!-- Login Form -->
             <div id="adminLogin" class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
                 <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">🔐 Acesso do Corretor</h2>
-                <p class="text-center text-gray-600 mb-6">Digite sua senha para acessar o painel</p>
+                <p class="text-center text-gray-600 mb-6">Digite seus dados para acessar o painel</p>
                 
                 <form id="loginForm" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Senha do Corretor</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" id="adminEmail" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" placeholder="seu@email.com" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
                         <input type="password" id="adminPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" placeholder="Digite sua senha" required>
                     </div>
                     <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-base">
@@ -210,20 +214,55 @@
                 </div>
                 
                 <div id="loginError" class="hidden mt-4 p-3 bg-red-50 rounded-lg border-l-4 border-red-500">
-                    <p class="text-red-700 text-sm">❌ Senha incorreta! Tente novamente.</p>
+                    <p class="text-red-700 text-sm">❌ Email ou senha incorretos! Tente novamente.</p>
                 </div>
                 
                 <!-- Password Reset Modal -->
                 <div id="passwordResetModal" class="hidden mt-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                    <h4 class="font-bold text-blue-800 mb-3">🔄 Redefinir Senha</h4>
-                    <p class="text-sm text-blue-700 mb-4">Para redefinir sua senha, você precisa editar o código do site:</p>
-                    <div class="bg-white p-3 rounded border text-xs font-mono text-gray-800 mb-3">
-                        <p><strong>1.</strong> Abra o arquivo do código</p>
-                        <p><strong>2.</strong> Procure por: <code>const correctPassword = 'admin123';</code></p>
-                        <p><strong>3.</strong> Troque 'admin123' pela sua nova senha</p>
-                        <p><strong>4.</strong> Salve o arquivo</p>
+                    <h4 class="font-bold text-blue-800 mb-3">🔄 Recuperar Senha</h4>
+                    
+                    <!-- Etapa 1: Verificar Email -->
+                    <div id="resetStep1" class="space-y-3">
+                        <p class="text-sm text-blue-700 mb-3">📧 Digite seu email cadastrado:</p>
+                        <div>
+                            <input type="email" id="resetEmail" placeholder="seu@email.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm">
+                        </div>
+                        <button type="button" onclick="verifyResetEmail()" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                            📧 Verificar Email
+                        </button>
                     </div>
-                    <button onclick="hidePasswordReset()" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                    
+                    <!-- Etapa 2: Pergunta Secreta -->
+                    <div id="resetStep2" class="hidden space-y-3">
+                        <p class="text-sm text-blue-700 mb-3">🔐 Responda sua pergunta secreta:</p>
+                        <div class="bg-white p-3 rounded border">
+                            <p class="text-sm font-medium text-gray-800" id="secretQuestion">Qual o nome da sua primeira imobiliária?</p>
+                        </div>
+                        <div>
+                            <input type="text" id="secretAnswer" placeholder="Digite sua resposta" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm">
+                        </div>
+                        <button type="button" onclick="verifySecretAnswer()" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+                            ✅ Verificar Resposta
+                        </button>
+                    </div>
+                    
+                    <!-- Etapa 3: Nova Senha -->
+                    <div id="resetStep3" class="hidden space-y-3">
+                        <p class="text-sm text-green-700 mb-3">✅ Verificação aprovada! Digite sua nova senha:</p>
+                        <div>
+                            <input type="password" id="newPasswordReset" placeholder="Nova senha" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm">
+                        </div>
+                        <div>
+                            <input type="password" id="confirmPasswordReset" placeholder="Confirmar nova senha" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm">
+                        </div>
+                        <button type="button" onclick="resetPassword()" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+                            🔄 Alterar Senha
+                        </button>
+                    </div>
+                    
+                    <div id="resetMessage" class="hidden mt-3 p-2 rounded-lg text-sm"></div>
+                    
+                    <button onclick="hidePasswordReset()" class="text-blue-600 hover:text-blue-800 text-sm font-medium mt-4">
                         ← Voltar ao login
                     </button>
                 </div>
@@ -290,6 +329,36 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">Vagas</label>
                             <input type="number" id="parking" class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
                         </div>
+                    </div>
+
+                    <!-- Personalização de Ícones e Textos -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">🎨 Personalizar Ícones e Textos</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ícone Quartos</label>
+                                <input type="text" id="bedroomIcon" value="🛏️" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-center text-lg">
+                                <input type="text" id="bedroomText" value="Quartos" placeholder="Texto para quartos" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 mt-2 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ícone Banheiros</label>
+                                <input type="text" id="bathroomIcon" value="🚿" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-center text-lg">
+                                <input type="text" id="bathroomText" value="Banheiros" placeholder="Texto para banheiros" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 mt-2 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ícone Vagas</label>
+                                <input type="text" id="parkingIcon" value="🚗" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-center text-lg">
+                                <input type="text" id="parkingText" value="Vagas" placeholder="Texto para vagas" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 mt-2 text-sm">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ícone Área</label>
+                                <input type="text" id="areaIcon" value="📐" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-center text-lg sm:w-32">
+                                <input type="text" id="areaText" value="m²" placeholder="Texto para área" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 mt-2 text-sm sm:w-32">
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-3">💡 Dica: Você pode usar emojis ou símbolos como ícones. Exemplos: 🏠 🛏️ 🚿 🚗 📐 🏢 🌟</p>
                     </div>
 
                     <div>
@@ -585,7 +654,18 @@
             const container = document.getElementById(containerId);
             if (!container) return;
             
-            container.innerHTML = propertiesToRender.map(property => `
+            container.innerHTML = propertiesToRender.map(property => {
+                // Usar ícones e textos personalizados se disponíveis, senão usar padrão
+                const areaIcon = property.areaIcon || '📐';
+                const areaText = property.areaText || 'm²';
+                const bedroomIcon = property.bedroomIcon || '🛏️';
+                const bedroomText = property.bedroomText || '';
+                const bathroomIcon = property.bathroomIcon || '🚿';
+                const bathroomText = property.bathroomText || '';
+                const parkingIcon = property.parkingIcon || '🚗';
+                const parkingText = property.parkingText || '';
+                
+                return `
                 <div class="property-card bg-white rounded-lg shadow-lg overflow-hidden">
                     <img src="${property.photos[0]}" alt="${property.title}" class="w-full h-48 object-cover">
                     <div class="p-6">
@@ -593,17 +673,18 @@
                         <p class="text-2xl font-bold text-blue-600 mb-3">${property.price}</p>
                         <p class="text-gray-600 mb-4">${property.address}</p>
                         <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
-                            <span>📐 ${property.area}m²</span>
-                            ${property.bedrooms > 0 ? `<span>🛏️ ${property.bedrooms}</span>` : ''}
-                            <span>🚿 ${property.bathrooms}</span>
-                            <span>🚗 ${property.parking}</span>
+                            <span>${areaIcon} ${property.area}${areaText}</span>
+                            ${property.bedrooms > 0 ? `<span>${bedroomIcon} ${property.bedrooms} ${bedroomText}</span>` : ''}
+                            <span>${bathroomIcon} ${property.bathrooms} ${bathroomText}</span>
+                            <span>${parkingIcon} ${property.parking} ${parkingText}</span>
                         </div>
                         <button onclick="showPropertyDetails(${property.id}); trackPropertyView('${property.title}', '${property.type}', '${property.price}')" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-base lg:text-lg font-medium">
                             Ver Detalhes
                         </button>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // Property details modal
@@ -717,29 +798,113 @@
         // Password reset functions
         function showPasswordReset() {
             document.getElementById('passwordResetModal').classList.remove('hidden');
+            resetPasswordModal(); // Resetar para primeira etapa
         }
         
         function hidePasswordReset() {
             document.getElementById('passwordResetModal').classList.add('hidden');
+            resetPasswordModal(); // Limpar estado
         }
+
+        // Dados do corretor (CONFIGURE AQUI!)
+        const adminCredentials = {
+            email: 'corretor@imobiliaria.com', // ALTERE ESTE EMAIL!
+            password: 'admin123', // ALTERE ESTA SENHA!
+            secretAnswer: 'ImóvelPro' // ALTERE ESTA RESPOSTA SECRETA!
+        };
 
         // Login form handler
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const email = document.getElementById('adminEmail').value.toLowerCase();
             const password = document.getElementById('adminPassword').value;
-            const correctPassword = 'admin123'; // ALTERE ESTA SENHA!
             
-            if (password === correctPassword) {
+            if (email === adminCredentials.email.toLowerCase() && password === adminCredentials.password) {
                 sessionStorage.setItem('adminLoggedIn', 'true');
+                sessionStorage.setItem('adminEmail', email);
                 showAdminContent();
+                document.getElementById('adminEmail').value = '';
                 document.getElementById('adminPassword').value = '';
                 hidePasswordReset(); // Esconder modal de reset se estiver aberto
             } else {
                 document.getElementById('loginError').classList.remove('hidden');
+                document.getElementById('adminEmail').value = '';
                 document.getElementById('adminPassword').value = '';
-                document.getElementById('adminPassword').focus();
+                document.getElementById('adminEmail').focus();
             }
         });
+
+        // Password reset functions
+        function verifyResetEmail() {
+            const email = document.getElementById('resetEmail').value.toLowerCase();
+            
+            if (email === adminCredentials.email.toLowerCase()) {
+                document.getElementById('resetStep1').classList.add('hidden');
+                document.getElementById('resetStep2').classList.remove('hidden');
+                showResetMessage('✅ Email verificado! Responda a pergunta secreta.', 'success');
+            } else {
+                showResetMessage('❌ Email não encontrado no sistema!', 'error');
+            }
+        }
+
+        function verifySecretAnswer() {
+            const answer = document.getElementById('secretAnswer').value.toLowerCase();
+            
+            if (answer === adminCredentials.secretAnswer.toLowerCase()) {
+                document.getElementById('resetStep2').classList.add('hidden');
+                document.getElementById('resetStep3').classList.remove('hidden');
+                showResetMessage('✅ Resposta correta! Agora defina sua nova senha.', 'success');
+            } else {
+                showResetMessage('❌ Resposta incorreta! Tente novamente.', 'error');
+            }
+        }
+
+        function resetPassword() {
+            const newPass = document.getElementById('newPasswordReset').value;
+            const confirmPass = document.getElementById('confirmPasswordReset').value;
+            
+            if (newPass.length < 4) {
+                showResetMessage('❌ Nova senha deve ter pelo menos 4 caracteres!', 'error');
+                return;
+            }
+            
+            if (newPass !== confirmPass) {
+                showResetMessage('❌ As senhas não coincidem!', 'error');
+                return;
+            }
+            
+            // Alterar senha
+            adminCredentials.password = newPass;
+            
+            // Limpar campos
+            document.getElementById('resetEmail').value = '';
+            document.getElementById('secretAnswer').value = '';
+            document.getElementById('newPasswordReset').value = '';
+            document.getElementById('confirmPasswordReset').value = '';
+            
+            showResetMessage('✅ Senha alterada com sucesso! Você pode fazer login agora.', 'success');
+            
+            // Voltar ao login após 3 segundos
+            setTimeout(() => {
+                hidePasswordReset();
+                resetPasswordModal();
+            }, 3000);
+        }
+
+        function resetPasswordModal() {
+            // Resetar todas as etapas
+            document.getElementById('resetStep1').classList.remove('hidden');
+            document.getElementById('resetStep2').classList.add('hidden');
+            document.getElementById('resetStep3').classList.add('hidden');
+            document.getElementById('resetMessage').classList.add('hidden');
+        }
+
+        function showResetMessage(message, type) {
+            const messageDiv = document.getElementById('resetMessage');
+            messageDiv.textContent = message;
+            messageDiv.className = `mt-3 p-2 rounded-lg text-sm ${type === 'error' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
+            messageDiv.classList.remove('hidden');
+        }
 
         // Admin functions
         function loadAdminProperties() {
@@ -778,6 +943,16 @@
             document.getElementById('parking').value = property.parking;
             document.getElementById('address').value = property.address;
             document.getElementById('description').value = property.description;
+            
+            // Preencher campos de ícones e textos personalizados
+            document.getElementById('areaIcon').value = property.areaIcon || '📐';
+            document.getElementById('areaText').value = property.areaText || 'm²';
+            document.getElementById('bedroomIcon').value = property.bedroomIcon || '🛏️';
+            document.getElementById('bedroomText').value = property.bedroomText || '';
+            document.getElementById('bathroomIcon').value = property.bathroomIcon || '🚿';
+            document.getElementById('bathroomText').value = property.bathroomText || '';
+            document.getElementById('parkingIcon').value = property.parkingIcon || '🚗';
+            document.getElementById('parkingText').value = property.parkingText || '';
             
             // Mostrar fotos existentes
             const photoPreview = document.getElementById('photoPreview');
@@ -949,6 +1124,15 @@
                 parking: parseInt(document.getElementById('parking').value) || 0,
                 address: document.getElementById('address').value,
                 description: document.getElementById('description').value,
+                // Salvar ícones e textos personalizados
+                areaIcon: document.getElementById('areaIcon').value || '📐',
+                areaText: document.getElementById('areaText').value || 'm²',
+                bedroomIcon: document.getElementById('bedroomIcon').value || '🛏️',
+                bedroomText: document.getElementById('bedroomText').value || '',
+                bathroomIcon: document.getElementById('bathroomIcon').value || '🚿',
+                bathroomText: document.getElementById('bathroomText').value || '',
+                parkingIcon: document.getElementById('parkingIcon').value || '🚗',
+                parkingText: document.getElementById('parkingText').value || '',
                 photos: []
             };
             
@@ -1106,5 +1290,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b8c12633ac1d1b',t:'MTc1NDU5MDQ3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96da29cec6e2628a',t:'MTc1NDk0MDc5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
