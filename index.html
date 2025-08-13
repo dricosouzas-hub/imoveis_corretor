@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marcio Ramos - Imóveis</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Adicione o Supabase JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        // Configure o Supabase (SUBSTITUA COM SEUS DADOS)
-        const supabaseUrl = 'https://jlhgivihswqwdovvnfpn.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsaGdpdmloc3dxd2RvdnZuZnBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5NTYzNzYsImV4cCI6MjA3MDUzMjM3Nn0.sdOnVQWruUk2EUq9RyaQmCdlphkFtIPtNDA8Ft1QcUI';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-    </script>
+   <!-- NO HEAD (antes de qualquer script seu) -->
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+  // Configuração INFALÍVEL (coloque SUAS chaves)
+  window.supabase = supabase.createClient(
+    'https://jlhgivihswqwdovvnfpn.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsaGdpdmloc3dxd2RvdnZuZnBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5NTYzNzYsImV4cCI6MjA3MDUzMjM3Nn0.sdOnVQWruUk2EUq9RyaQmCdlphkFtIPtNDA8Ft1QcUI'
+  );
+</script>
     
     <!-- Meta Pixel (Facebook) -->
     <script>
