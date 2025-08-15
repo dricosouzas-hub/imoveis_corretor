@@ -604,10 +604,16 @@
                             <label class="block text-sm font-medium mb-2">Foto Principal (Thumbnail)</label>
                             <input type="file" name="thumbnailImage" accept="image/*" class="w-full p-3 border border-gray-300 rounded-lg" onchange="previewThumbnail(this)">
                             <p class="text-sm text-gray-500 mt-1">Esta será a imagem principal do imóvel</p>
+                            <p class="text-xs text-blue-600 mt-1">📏 Tamanho máximo: 2MB por imagem | Formatos: JPG, PNG, WEBP</p>
                             <div id="thumbnailPreview" class="mt-2 hidden">
                                 <p class="text-sm font-medium text-green-600 mb-2">📸 Nova foto principal selecionada:</p>
-                                <div class="w-32 h-24 border-2 border-green-500 rounded overflow-hidden">
+                                <div class="w-32 h-24 border-2 border-green-500 rounded overflow-hidden relative group">
                                     <img id="thumbnailPreviewImg" src="" alt="Preview" class="w-full h-full object-cover">
+                                    <button type="button" onclick="removePreviewImage(this, 'thumbnail')" 
+                                            class="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 hover:scale-110 text-white rounded-full w-6 h-6 text-xs transition-all z-50 flex items-center justify-center font-bold shadow-xl border-2 border-white cursor-pointer opacity-0 group-hover:opacity-100"
+                                            title="🗑️ Remover thumbnail">
+                                        ✕
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -615,6 +621,7 @@
                             <label class="block text-sm font-medium mb-2">Galeria de Fotos (máximo 11 fotos)</label>
                             <input type="file" name="galleryImages" accept="image/*" multiple class="w-full p-3 border border-gray-300 rounded-lg" onchange="previewGalleryImages(this)">
                             <p class="text-sm text-gray-500 mt-1">Fotos adicionais para a galeria do imóvel (serão ADICIONADAS às existentes)</p>
+                            <p class="text-xs text-blue-600 mt-1">📏 Tamanho máximo: 2MB por imagem | Máximo: 11 fotos | Formatos: JPG, PNG, WEBP</p>
                             <div id="galleryPreview" class="mt-2 hidden">
                                 <p class="text-sm font-medium text-green-600 mb-2">📸 Novas fotos da galeria selecionadas:</p>
                                 <div id="galleryPreviewGrid" class="grid grid-cols-4 gap-2"></div>
@@ -1068,11 +1075,42 @@
             return true;
         }
 
+        function validateImageSize(file, maxSizeMB = 2) {
+            const maxSizeBytes = maxSizeMB * 1024 * 1024; // Convert MB to bytes
+            if (file.size > maxSizeBytes) {
+                return false;
+            }
+            return true;
+        }
+
+        function validateAllImages(files, maxSizeMB = 2) {
+            const oversizedFiles = [];
+            Array.from(files).forEach((file, index) => {
+                if (!validateImageSize(file, maxSizeMB)) {
+                    const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                    oversizedFiles.push(`${file.name} (${sizeMB}MB)`);
+                }
+            });
+            
+            if (oversizedFiles.length > 0) {
+                alert(`❌ As seguintes imagens são muito grandes (máximo ${maxSizeMB}MB cada):\n\n${oversizedFiles.join('\n')}\n\n💡 Dica: Use imagens menores ou comprima-as antes de enviar.`);
+                return false;
+            }
+            return true;
+        }
+
         function previewThumbnail(input) {
             const preview = document.getElementById('thumbnailPreview');
             const previewImg = document.getElementById('thumbnailPreviewImg');
             
             if (input.files && input.files[0]) {
+                // Validate image size first
+                if (!validateAllImages(input.files, 2)) {
+                    input.value = '';
+                    preview.classList.add('hidden');
+                    return;
+                }
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     previewImg.src = e.target.result;
@@ -1093,6 +1131,13 @@
                 return;
             }
             
+            // Validate image sizes
+            if (!validateAllImages(input.files, 2)) {
+                input.value = '';
+                preview.classList.add('hidden');
+                return;
+            }
+            
             if (input.files && input.files.length > 0) {
                 previewGrid.innerHTML = '';
                 
@@ -1100,10 +1145,15 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         const imgDiv = document.createElement('div');
-                        imgDiv.className = 'relative border-2 border-green-500 rounded overflow-hidden';
+                        imgDiv.className = 'relative border-2 border-green-500 rounded overflow-hidden group';
                         imgDiv.innerHTML = `
                             <img src="${e.target.result}" alt="Preview ${index + 1}" class="w-full h-20 object-cover">
                             <div class="absolute bottom-0 left-0 bg-green-500 text-white text-xs px-1 rounded-tr">NOVA</div>
+                            <button type="button" onclick="removePreviewImage(this, 'gallery')" 
+                                    class="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 hover:scale-110 text-white rounded-full w-6 h-6 text-xs transition-all z-50 flex items-center justify-center font-bold shadow-xl border-2 border-white cursor-pointer opacity-0 group-hover:opacity-100"
+                                    title="🗑️ Remover esta imagem">
+                                ✕
+                            </button>
                         `;
                         previewGrid.appendChild(imgDiv);
                     };
@@ -1113,6 +1163,60 @@
                 preview.classList.remove('hidden');
             } else {
                 preview.classList.add('hidden');
+            }
+        }
+
+        // Preview image removal functions
+        function removePreviewImage(button, type) {
+            console.log('🗑️ Removendo imagem do preview:', type);
+            
+            if (type === 'thumbnail') {
+                // Limpar input da thumbnail
+                const thumbnailInput = document.querySelector('input[name="thumbnailImage"]');
+                if (thumbnailInput) {
+                    thumbnailInput.value = '';
+                }
+                
+                // Esconder preview
+                document.getElementById('thumbnailPreview').classList.add('hidden');
+                console.log('✅ Thumbnail preview removida');
+                
+            } else if (type === 'gallery') {
+                // Remover apenas esta imagem específica do preview
+                const imageDiv = button.closest('.relative');
+                const previewGrid = document.getElementById('galleryPreviewGrid');
+                const galleryInput = document.querySelector('input[name="galleryImages"]');
+                
+                if (imageDiv && previewGrid && galleryInput) {
+                    // Encontrar o índice da imagem removida
+                    const allImages = Array.from(previewGrid.children);
+                    const imageIndex = allImages.indexOf(imageDiv);
+                    
+                    console.log('🎯 Removendo imagem do índice:', imageIndex);
+                    
+                    // Criar novo FileList sem esta imagem
+                    const dt = new DataTransfer();
+                    const files = Array.from(galleryInput.files);
+                    
+                    files.forEach((file, index) => {
+                        if (index !== imageIndex) {
+                            dt.items.add(file);
+                        }
+                    });
+                    
+                    // Atualizar o input
+                    galleryInput.files = dt.files;
+                    
+                    // Remover o elemento visual
+                    imageDiv.remove();
+                    
+                    // Se não há mais imagens, esconder o preview
+                    if (previewGrid.children.length === 0) {
+                        document.getElementById('galleryPreview').classList.add('hidden');
+                    }
+                    
+                    console.log('✅ Imagem removida do preview da galeria');
+                }
             }
         }
 
@@ -2100,5 +2204,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f4ef5710e54b4c',t:'MTc1NTIyMTUxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f4fbf8b2db4b35',t:'MTc1NTIyMjAzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
