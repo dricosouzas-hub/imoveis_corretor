@@ -3,49 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcio Ramos - Imóveis</title>
-   <!-- NO HEAD (antes de qualquer script seu) -->
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script>
-  // Configuração INFALÍVEL (coloque SUAS chaves)
-  window.supabase = supabase.createClient(
-    'https://jlhgivihswqwdovvnfpn.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsaGdpdmloc3dxd2RvdnZuZnBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5NTYzNzYsImV4cCI6MjA3MDUzMjM3Nn0.sdOnVQWruUk2EUq9RyaQmCdlphkFtIPtNDA8Ft1QcUI'
-  );
-</script>
+    <title id="pageTitle">Marcio Ramos Imóveis - Sua Imobiliária Digital</title>
     
-    <!-- Meta Pixel (Facebook) -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'SEU_PIXEL_ID_AQUI');
-    fbq('track', 'PageView');
+    <!-- SEO Meta Tags -->
+    <meta name="description" id="pageDescription" content="Encontre os melhores imóveis com Marcio Ramos, corretor especialista há 15 anos. Casas, apartamentos, terrenos para compra, venda e aluguel.">
+    <meta name="keywords" content="imóveis, corretor, casas, apartamentos, terrenos, compra, venda, aluguel, Marcio Ramos, imobiliária">
+    <meta name="author" content="Marcio Ramos Imóveis">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" id="canonical" href="https://marcioramosimoveis.com.br">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" id="ogUrl" content="https://marcioramosimoveis.com.br">
+    <meta property="og:title" id="ogTitle" content="Marcio Ramos Imóveis - Sua Imobiliária Digital">
+    <meta property="og:description" id="ogDescription" content="Encontre os melhores imóveis com Marcio Ramos, corretor especialista há 15 anos.">
+    <meta property="og:image" content="https://marcioramosimoveis.com.br/og-image.jpg">
+    <meta property="og:site_name" content="Marcio Ramos Imóveis">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" id="twitterUrl" content="https://marcioramosimoveis.com.br">
+    <meta property="twitter:title" id="twitterTitle" content="Marcio Ramos Imóveis - Sua Imobiliária Digital">
+    <meta property="twitter:description" id="twitterDescription" content="Encontre os melhores imóveis com Marcio Ramos, corretor especialista há 15 anos.">
+    <meta property="twitter:image" content="https://marcioramosimoveis.com.br/og-image.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" id="structuredData">
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": "Marcio Ramos Imóveis",
+      "description": "Corretor de imóveis especialista há mais de 15 anos",
+      "url": "https://marcioramosimoveis.com.br",
+      "telephone": "+55-11-99999-9999",
+      "email": "marcio@marcioramosimoveis.com.br",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua das Flores, 123",
+        "addressLocality": "São Paulo",
+        "addressRegion": "SP",
+        "postalCode": "01000-000",
+        "addressCountry": "BR"
+      },
+      "sameAs": [
+        "https://www.facebook.com/marcioramosimoveis",
+        "https://www.instagram.com/marcioramosimoveis"
+      ]
+    }
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=SEU_PIXEL_ID_AQUI&ev=PageView&noscript=1"
-    /></noscript>
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Meta Pixel (Facebook) - Conditional Loading -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID');
+    // Função para instalar Meta Pixel
+    function installMetaPixel(pixelId) {
+        if (typeof fbq !== 'undefined') return; // Já instalado
+        
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        fbq('init', pixelId);
+        fbq('track', 'PageView');
+        
+        // Adicionar noscript
+        const noscript = document.createElement('noscript');
+        noscript.innerHTML = `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1" />`;
+        document.head.appendChild(noscript);
+        
+        console.log('Meta Pixel instalado com ID:', pixelId);
+    }
+    
+    // Instalar automaticamente se houver ID configurado
+    const metaPixelId = localStorage.getItem('metaPixelId');
+    if (metaPixelId && metaPixelId !== 'SEU_PIXEL_ID_AQUI') {
+        installMetaPixel(metaPixelId);
+    }
     </script>
     
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    <!-- Google Analytics 4 - Conditional Loading -->
+    <script>
+    // Função para instalar Google Analytics
+    function installGoogleAnalytics(measurementId) {
+        if (typeof gtag !== 'undefined') return; // Já instalado
+        
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+        document.head.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', measurementId);
+        
+        console.log('Google Analytics instalado com ID:', measurementId);
+    }
+    
+    // Instalar automaticamente se houver ID configurado
+    const gaId = localStorage.getItem('googleAnalyticsId');
+    if (gaId && gaId !== 'GA_MEASUREMENT_ID') {
+        installGoogleAnalytics(gaId);
+    }
+    </script>
+    
+    <!-- Google Tag Manager - Conditional Loading -->
+    <script>
+    // Função para instalar Google Tag Manager
+    function installGoogleTagManager(gtmId) {
+        if (window.dataLayer && window.dataLayer.find(item => item['gtm.start'])) return; // Já instalado
+        
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtmId);
+        
+        // Adicionar noscript
+        const noscript = document.createElement('noscript');
+        noscript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+        document.body.insertBefore(noscript, document.body.firstChild);
+        
+        console.log('Google Tag Manager instalado com ID:', gtmId);
+    }
+    
+    // Instalar automaticamente se houver ID configurado
+    const gtmId = localStorage.getItem('googleTagManagerId');
+    if (gtmId && gtmId !== 'GTM-XXXXXXX') {
+        installGoogleTagManager(gtmId);
+    }
+    </script>
+    
     <style>
         .property-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -63,1101 +157,1807 @@
         .modal {
             backdrop-filter: blur(5px);
         }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .feature-icon {
+            transition: transform 0.3s ease;
+        }
+        .feature-icon:hover {
+            transform: scale(1.1);
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .hero-section {
+            height: 450px;
+        }
+        .image-gallery {
+            position: relative;
+        }
+        .gallery-main-image {
+            transition: opacity 0.3s ease;
+        }
+        .gallery-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+        .gallery-nav-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .gallery-nav-btn.prev {
+            left: 10px;
+        }
+        .gallery-nav-btn.next {
+            right: 10px;
+        }
+        .gallery-thumbnail {
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .gallery-thumbnail:hover {
+            transform: scale(1.05);
+        }
+        .gallery-thumbnail.active {
+            border-color: #3b82f6;
+            opacity: 1;
+        }
+        .gallery-thumbnail:not(.active) {
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
-    <!-- WhatsApp Floating Button -->
-    <div id="whatsappButton" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
-        <a href="https://wa.me/5511999999999?text=Olá! Vi um imóvel no site e gostaria de mais informações." 
-           target="_blank" 
-           onclick="trackWhatsAppClick()"
-           class="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 sm:p-4 shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
-            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-            </svg>
-        </a>
-    </div>
+
     <!-- Header -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
+    <header class="bg-white shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3 sm:py-4">
             <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 lg:w-12 lg:h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-xl lg:text-2xl">🏠</span>
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg sm:text-xl">🏠</span>
                     </div>
-                    <h1 class="text-xl lg:text-3xl font-bold text-gray-800">ImóvelPro</h1>
+                    <div>
+                        <h1 class="text-lg sm:text-2xl font-bold text-gray-800">Marcio Ramos</h1>
+                        <p class="text-xs sm:text-sm text-gray-600">Imóveis</p>
+                    </div>
                 </div>
-                <nav class="hidden md:flex space-x-6 lg:space-x-8">
-                    <button onclick="showSection('home')" class="nav-btn text-gray-700 hover:text-blue-600 font-medium transition-colors text-base lg:text-lg px-2 py-1">Início</button>
-                    <button onclick="showSection('casas')" class="nav-btn text-gray-700 hover:text-blue-600 font-medium transition-colors text-base lg:text-lg px-2 py-1">Casas</button>
-                    <button onclick="showSection('apartamentos')" class="nav-btn text-gray-700 hover:text-blue-600 font-medium transition-colors text-base lg:text-lg px-2 py-1">Apartamentos</button>
-                    <button onclick="showSection('comercial')" class="nav-btn text-gray-700 hover:text-blue-600 font-medium transition-colors text-base lg:text-lg px-2 py-1">Comercial</button>
-                    <button onclick="showSection('aluguel')" class="nav-btn text-gray-700 hover:text-blue-600 font-medium transition-colors text-base lg:text-lg px-2 py-1">Aluguel</button>
-                    <button onclick="showSection('venda')" class="nav-btn text-gray-700 hover:text-blue-600 font-medium transition-colors text-base lg:text-lg px-2 py-1">Venda</button>
-                    <button onclick="showSection('admin')" class="bg-blue-600 text-white px-4 py-2 lg:px-6 lg:py-3 rounded-lg hover:bg-blue-700 transition-colors text-base lg:text-lg font-medium">Corretor</button>
+                <nav class="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition-colors text-sm lg:text-base">Início</a>
+                    <div class="dropdown relative">
+                        <a href="#properties" class="text-gray-700 hover:text-blue-600 transition-colors cursor-pointer text-sm lg:text-base">Imóveis ▼</a>
+                        <div class="dropdown-menu absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-48 hidden z-50">
+                            <a href="#" onclick="filterProperties('compra')" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 text-sm">Compra</a>
+                            <a href="#" onclick="filterProperties('venda')" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 text-sm">Venda</a>
+                            <a href="#" onclick="filterProperties('aluguel')" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 text-sm">Aluguel</a>
+                        </div>
+                    </div>
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors text-sm lg:text-base">Sobre</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors text-sm lg:text-base">Contato</a>
+                    <button onclick="showAdminLogin()" class="text-gray-700 hover:text-blue-600 transition-colors text-sm lg:text-base">Admin</button>
                 </nav>
                 <button onclick="toggleMobileMenu()" class="md:hidden text-gray-700 p-2">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
+            
             <!-- Mobile Menu -->
-            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200 pt-4">
-                <div class="grid grid-cols-2 gap-3">
-                    <button onclick="showSection('home')" class="text-center py-4 px-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors text-base font-medium">Início</button>
-                    <button onclick="showSection('casas')" class="text-center py-4 px-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors text-base font-medium">Casas</button>
-                    <button onclick="showSection('apartamentos')" class="text-center py-4 px-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors text-base font-medium">Apartamentos</button>
-                    <button onclick="showSection('comercial')" class="text-center py-4 px-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors text-base font-medium">Comercial</button>
-                    <button onclick="showSection('aluguel')" class="text-center py-4 px-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors text-base font-medium">Aluguel</button>
-                    <button onclick="showSection('venda')" class="text-center py-4 px-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors text-base font-medium">Venda</button>
-                </div>
-                <button onclick="showSection('admin')" class="w-full mt-4 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-base font-medium">Painel Corretor</button>
+            <div id="mobileMenu" class="md:hidden hidden mt-4 pb-4 border-t border-gray-200">
+                <nav class="flex flex-col space-y-3 pt-4">
+                    <a href="#home" onclick="closeMobileMenu()" class="text-gray-700 hover:text-blue-600 transition-colors py-2">Início</a>
+                    <div class="border-l-2 border-gray-200 pl-4">
+                        <p class="text-gray-600 font-medium mb-2">Imóveis</p>
+                        <a href="#" onclick="filterProperties('compra'); closeMobileMenu();" class="block text-gray-600 hover:text-blue-600 py-1 text-sm">Compra</a>
+                        <a href="#" onclick="filterProperties('venda'); closeMobileMenu();" class="block text-gray-600 hover:text-blue-600 py-1 text-sm">Venda</a>
+                        <a href="#" onclick="filterProperties('aluguel'); closeMobileMenu();" class="block text-gray-600 hover:text-blue-600 py-1 text-sm">Aluguel</a>
+                    </div>
+                    <a href="#about" onclick="closeMobileMenu()" class="text-gray-700 hover:text-blue-600 transition-colors py-2">Sobre</a>
+                    <a href="#contact" onclick="closeMobileMenu()" class="text-gray-700 hover:text-blue-600 transition-colors py-2">Contato</a>
+                    <button onclick="showAdminLogin(); closeMobileMenu();" class="text-left text-gray-700 hover:text-blue-600 transition-colors py-2">Admin</button>
+                </nav>
             </div>
         </div>
     </header>
 
-    <!-- Home Section -->
-    <section id="home" class="section-content">
-        <!-- Hero Section -->
-        <div class="bg-gradient-to-r from-blue-800 to-blue-900 text-white py-12 sm:py-16 lg:py-20">
-            <div class="container mx-auto px-4">
-                <div class="text-left max-w-4xl">
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">Encontre o Lugar dos Sonhos para Morar!</h2>
-                    <p class="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 opacity-90">A melhor seleção de casas, apartamentos e salas comerciais da região. Realizamos o seu sonho da casa própria com segurança e transparência.</p>
-                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                        <button onclick="showSection('casas')" class="bg-white text-blue-800 px-8 sm:px-10 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-base sm:text-lg">Ver Casas</button>
-                        <button onclick="showSection('apartamentos')" class="bg-transparent border-2 border-white text-white px-8 sm:px-10 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-800 transition-colors text-base sm:text-lg">Ver Apartamentos</button>
-                    </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient text-white hero-section flex items-center">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3">Encontre Seu Lar Ideal</h2>
+            <p class="text-base sm:text-lg lg:text-xl mb-3 sm:mb-4 max-w-2xl mx-auto px-4">Descubra os melhores imóveis com Marcio Ramos, seu corretor de confiança há mais de 15 anos no mercado.</p>
+            
+            <!-- Search Form -->
+            <div class="bg-white rounded-lg p-3 sm:p-4 max-w-5xl mx-auto shadow-xl">
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                    <select id="propertyType" class="flex-1 p-2 sm:p-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 text-xs sm:text-sm">
+                        <option value="">Tipo</option>
+                        <option value="casa">Casa</option>
+                        <option value="apartamento">Apartamento</option>
+                        <option value="terreno">Terreno</option>
+                        <option value="comercial">Comercial</option>
+                        <option value="chacara">Chácara</option>
+                        <option value="sobrado">Sobrado</option>
+                    </select>
+                    <select id="transactionType" class="flex-1 p-2 sm:p-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 text-xs sm:text-sm">
+                        <option value="">Transação</option>
+                        <option value="compra">Compra</option>
+                        <option value="aluguel">Aluguel</option>
+                        <option value="venda">Venda</option>
+                    </select>
+                    <input type="text" id="priceRange" placeholder="Preço máx." class="flex-1 p-2 sm:p-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 text-xs sm:text-sm">
+                    <button onclick="searchProperties()" class="bg-blue-600 hover:bg-blue-700 text-white p-2 sm:p-3 px-4 sm:px-6 rounded-lg font-semibold transition-colors text-xs sm:text-sm whitespace-nowrap">
+                        🔍 Buscar
+                    </button>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Featured Properties -->
-        <div class="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
+    <!-- Properties Section -->
+    <section id="properties" class="py-12 sm:py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
             <h3 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Imóveis em Destaque</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" id="featuredProperties">
+            <div id="propertiesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <!-- Properties will be loaded here -->
             </div>
         </div>
     </section>
 
-    <!-- Properties Sections -->
-    <section id="casas" class="section-content hidden">
-        <div class="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Casas Disponíveis</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" id="casasGrid">
-                <!-- Casa properties will be loaded here -->
+    <!-- About Section -->
+    <section id="about" class="py-12 sm:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-800">Sobre Marcio Ramos</h3>
+                <p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 px-4">
+                    Com mais de 15 anos de experiência no mercado imobiliário, Marcio Ramos se destaca pela excelência no atendimento e pelo conhecimento profundo do mercado local. Especialista em negociações e com vasta carteira de clientes satisfeitos.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12">
+                    <div class="text-center p-4">
+                        <div class="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">800+</div>
+                        <div class="text-sm sm:text-base text-gray-600">Imóveis Vendidos</div>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">1500+</div>
+                        <div class="text-sm sm:text-base text-gray-600">Clientes Satisfeitos</div>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">15+</div>
+                        <div class="text-sm sm:text-base text-gray-600">Anos de Experiência</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="apartamentos" class="section-content hidden">
-        <div class="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Apartamentos Disponíveis</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" id="apartamentosGrid">
-                <!-- Apartamento properties will be loaded here -->
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 sm:py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Entre em Contato</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
+                <div class="order-2 lg:order-1">
+                    <h4 class="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Fale com Marcio Ramos</h4>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <span class="text-xl sm:text-2xl mt-1">📍</span>
+                            <span class="text-sm sm:text-base">Rua das Flores, 123 - Centro</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl sm:text-2xl">📞</span>
+                            <a href="tel:+5511999999999" class="text-sm sm:text-base hover:text-blue-600 transition-colors">(11) 99999-9999</a>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="text-xl sm:text-2xl mt-1">✉️</span>
+                            <a href="mailto:marcio@marcioramosimoveis.com.br" class="text-sm sm:text-base hover:text-blue-600 transition-colors break-all">marcio@marcioramosimoveis.com.br</a>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="text-xl sm:text-2xl mt-1">🕒</span>
+                            <span class="text-sm sm:text-base">Segunda a Sábado: 8h às 18h</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <form class="space-y-4" onsubmit="submitContact(event)">
+                        <input type="text" placeholder="Seu nome" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+                        <input type="email" placeholder="Seu email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+                        <input type="tel" placeholder="Seu telefone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+                        <textarea placeholder="Sua mensagem" rows="4" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm sm:text-base resize-none"></textarea>
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-sm text-yellow-800">
+                            <p class="font-medium">📋 Formulário de Demonstração</p>
+                            <p class="mt-1">Este é um formulário de exemplo. Para contato real, use o WhatsApp ou telefone ao lado.</p>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
+                            📧 Enviar Mensagem (Demo)
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="comercial" class="section-content hidden">
-        <div class="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Salas Comerciais</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" id="comercialGrid">
-                <!-- Comercial properties will be loaded here -->
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">🏠</span>
+                        </div>
+                        <div>
+                            <h5 class="text-xl font-bold">Marcio Ramos</h5>
+                            <p class="text-sm text-gray-400">Imóveis</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400">Seu corretor de confiança.</p>
+                </div>
+                <div>
+                    <h6 class="font-semibold mb-4">Serviços</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Compra</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Venda</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Locação</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Avaliação</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="font-semibold mb-4">Tipos de Imóvel</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Apartamentos</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Casas</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terrenos</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Comercial</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="font-semibold mb-4">Redes Sociais</h6>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="text-2xl">📘</span>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="text-2xl">📷</span>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="text-2xl">🐦</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Marcio Ramos Imóveis. Todos os direitos reservados.</p>
             </div>
         </div>
-    </section>
+    </footer>
 
-    <section id="aluguel" class="section-content hidden">
-        <div class="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Imóveis para Aluguel</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" id="aluguelGrid">
-                <!-- Aluguel properties will be loaded here -->
-            </div>
-        </div>
-    </section>
+    <!-- WhatsApp Floating Button -->
+    <div id="whatsappButton" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
+        <a href="https://wa.me/5511999999999?text=Olá Marcio! Vi um imóvel no site e gostaria de mais informações." 
+           target="_blank" 
+           onclick="trackWhatsAppClick()"
+           class="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 sm:p-4 shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
+            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.687"/>
+            </svg>
+        </a>
+    </div>
 
-    <section id="venda" class="section-content hidden">
-        <div class="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Imóveis para Venda</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" id="vendaGrid">
-                <!-- Venda properties will be loaded here -->
+    <!-- Property Modal -->
+    <div id="propertyModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modalTitle" class="text-2xl font-bold"></h3>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="modalContent" class="space-y-4">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+                <div class="mt-6 flex space-x-4">
+                    <button onclick="scheduleVisit()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors">
+                        Agendar Visita
+                    </button>
+                    <button onclick="requestInfo()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors">
+                        Falar com Marcio
+                    </button>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full p-6">
+            <h3 class="text-2xl font-bold mb-4">Acesso do Corretor</h3>
+            <form onsubmit="adminLogin(event)">
+                <input type="password" id="adminPassword" placeholder="Digite a senha" required class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500">
+                <div class="flex space-x-4">
+                    <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors">
+                        Entrar
+                    </button>
+                    <button type="button" onclick="closeAdminLogin()" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-semibold transition-colors">
+                        Cancelar
+                    </button>
+                </div>
+                <div class="mt-4 text-center">
+                    <button type="button" onclick="recoverPassword()" class="text-blue-600 hover:text-blue-800 text-sm underline">
+                        Esqueci minha senha
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Admin Panel -->
-    <section id="admin" class="section-content hidden">
-        <div class="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
-            <!-- Login Form -->
-            <div id="adminLogin" class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">🔐 Acesso Exclusivo do Corretor</h2>
-                
-                <div class="space-y-4">
+    <div id="adminPanel" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold">Painel do Corretor - Marcio Ramos</h2>
+                <button onclick="closeAdminPanel()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                    Sair
+                </button>
+            </div>
+
+            <!-- Pixel Configuration -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold mb-4">Configuração de Pixels e Analytics</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                        <input type="email" id="adminEmail" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" placeholder="seu@email.com" required>
+                        <label class="block text-sm font-medium mb-2">Meta Pixel ID</label>
+                        <input type="text" id="metaPixelInput" placeholder="Ex: 123456789012345" class="w-full p-3 border border-gray-300 rounded-lg text-sm">
+                        <button onclick="installPixel('meta')" class="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm">
+                            Instalar Meta Pixel
+                        </button>
                     </div>
-                    
-                    <button onclick="sendMagicLink()" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-base">
-                        Enviar Link de Acesso
-                    </button>
-                    
-                    <div id="loginMessage" class="hidden mt-4 p-3 rounded-lg"></div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Google Analytics ID</label>
+                        <input type="text" id="googleAnalyticsInput" placeholder="Ex: G-XXXXXXXXXX" class="w-full p-3 border border-gray-300 rounded-lg text-sm">
+                        <button onclick="installPixel('ga')" class="mt-2 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg text-sm">
+                            Instalar Google Analytics
+                        </button>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Google Tag Manager ID</label>
+                        <input type="text" id="googleTagManagerInput" placeholder="Ex: GTM-XXXXXXX" class="w-full p-3 border border-gray-300 rounded-lg text-sm">
+                        <button onclick="installPixel('gtm')" class="mt-2 w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 rounded-lg text-sm">
+                            Instalar GTM
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                    <h4 class="font-semibold mb-2">Status dos Pixels:</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div id="metaPixelStatus" class="flex items-center space-x-2">
+                            <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                            <span>Meta Pixel: Não instalado</span>
+                        </div>
+                        <div id="gaStatus" class="flex items-center space-x-2">
+                            <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                            <span>Google Analytics: Não instalado</span>
+                        </div>
+                        <div id="gtmStatus" class="flex items-center space-x-2">
+                            <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                            <span>GTM: Não instalado</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Admin Panel Content (Hidden until login) -->
-            <div id="adminContent" class="hidden">
-                <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">Painel do Corretor</h2>
-                    <button onclick="logoutAdmin()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors text-sm font-medium">
-                        🚪 Sair
-                    </button>
-                </div>
-                
-                <!-- Add Property Form -->
-                <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8">
-                <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-800">Adicionar Novo Imóvel</h3>
-                <form id="propertyForm" class="space-y-4 sm:space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Título</label>
-                            <input type="text" id="title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" required>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Preço</label>
-                            <input type="text" id="price" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" placeholder="R$ 350.000" required>
+            <!-- Add Property Form -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 id="formTitle" class="text-xl font-bold mb-4">Adicionar Novo Imóvel</h3>
+                <form id="addPropertyForm" onsubmit="addProperty(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" name="title" placeholder="Título do imóvel" required class="p-3 border border-gray-300 rounded-lg">
+                        <input type="text" name="location" placeholder="Localização" required class="p-3 border border-gray-300 rounded-lg">
+                        <input type="text" name="price" placeholder="Preço (ex: R$ 500.000)" required class="p-3 border border-gray-300 rounded-lg">
+                        <select name="type" required class="p-3 border border-gray-300 rounded-lg">
+                            <option value="">Tipo de Imóvel</option>
+                            <option value="casa">Casa</option>
+                            <option value="apartamento">Apartamento</option>
+                            <option value="terreno">Terreno</option>
+                            <option value="comercial">Comercial</option>
+                            <option value="chacara">Chácara</option>
+                            <option value="sobrado">Sobrado</option>
+                        </select>
+                        <select name="transaction" required class="p-3 border border-gray-300 rounded-lg">
+                            <option value="">Tipo de Transação</option>
+                            <option value="compra">Compra</option>
+                            <option value="venda">Venda</option>
+                            <option value="aluguel">Aluguel</option>
+                        </select>
+                        <input type="text" name="area" placeholder="Área (ex: 85m²)" class="p-3 border border-gray-300 rounded-lg">
+                        <input type="text" name="bedrooms" placeholder="Dormitórios (ex: 3 dorms)" class="p-3 border border-gray-300 rounded-lg">
+                        <input type="text" name="bathrooms" placeholder="Banheiros (ex: 2 banh)" class="p-3 border border-gray-300 rounded-lg">
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" name="featured" id="featuredCheckbox" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="featuredCheckbox" class="text-sm font-medium text-gray-700">Imóvel em Destaque</label>
                         </div>
                     </div>
                     
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    <textarea name="description" placeholder="Descrição do imóvel" rows="3" required class="w-full p-3 border border-gray-300 rounded-lg"></textarea>
+                    
+                    <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo</label>
-                            <select id="type" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" required>
-                                <option value="">Selecione o tipo</option>
-                                <option value="casa">Casa</option>
-                                <option value="apartamento">Apartamento</option>
-                                <option value="comercial">Sala Comercial</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Transação</label>
-                            <select id="transaction" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" required>
-                                <option value="">Selecione</option>
-                                <option value="venda">Venda</option>
-                                <option value="aluguel">Aluguel</option>
-                            </select>
-                        </div>
-                        <div class="sm:col-span-2 lg:col-span-1">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Área (m²)</label>
-                            <input type="number" id="area" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" required>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-4 sm:gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Quartos</label>
-                            <input type="number" id="bedrooms" class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Banheiros</label>
-                            <input type="number" id="bathrooms" class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Vagas</label>
-                            <input type="number" id="parking" class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
-                        </div>
-                    </div>
-
-                    <!-- Personalização de Ícones e Textos -->
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h4 class="text-lg font-semibold mb-4 text-gray-800">🎨 Personalizar Ícones e Textos</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Ícone Quartos</label>
-                                <input type="text" id="bedroomIcon" value="🛏️" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-center text-lg">
-                                <input type="text" id="bedroomText" value="Quartos" placeholder="Texto para quartos" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 mt-2 text-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Ícone Banheiros</label>
-                                <input type="text" id="bathroomIcon" value="🚿" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-center text-lg">
-                                <input type="text" id="bathroomText" value="Banheiros" placeholder="Texto para banheiros" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 mt-2 text-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Ícone Vagas</label>
-                                <input type="text" id="parkingIcon" value="🚗" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-center text-lg">
-                                <input type="text" id="parkingText" value="Vagas" placeholder="Texto para vagas" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 mt-2 text-sm">
+                            <label class="block text-sm font-medium mb-2">Foto Principal (Thumbnail)</label>
+                            <input type="file" name="thumbnailImage" accept="image/*" class="w-full p-3 border border-gray-300 rounded-lg" onchange="previewThumbnail(this)">
+                            <p class="text-sm text-gray-500 mt-1">Esta será a imagem principal do imóvel</p>
+                            <div id="thumbnailPreview" class="mt-2 hidden">
+                                <p class="text-sm font-medium text-green-600 mb-2">📸 Nova foto principal selecionada:</p>
+                                <div class="w-32 h-24 border-2 border-green-500 rounded overflow-hidden">
+                                    <img id="thumbnailPreviewImg" src="" alt="Preview" class="w-full h-full object-cover">
+                                </div>
                             </div>
                         </div>
-                        <div class="mt-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Ícone Área</label>
-                                <input type="text" id="areaIcon" value="📐" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-center text-lg sm:w-32">
-                                <input type="text" id="areaText" value="m²" placeholder="Texto para área" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 mt-2 text-sm sm:w-32">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Galeria de Fotos (máximo 11 fotos)</label>
+                            <input type="file" name="galleryImages" accept="image/*" multiple class="w-full p-3 border border-gray-300 rounded-lg" onchange="previewGalleryImages(this)">
+                            <p class="text-sm text-gray-500 mt-1">Fotos adicionais para a galeria do imóvel (serão ADICIONADAS às existentes)</p>
+                            <div id="galleryPreview" class="mt-2 hidden">
+                                <p class="text-sm font-medium text-green-600 mb-2">📸 Novas fotos da galeria selecionadas:</p>
+                                <div id="galleryPreviewGrid" class="grid grid-cols-4 gap-2"></div>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-500 mt-3">💡 Dica: Você pode usar emojis ou símbolos como ícones. Exemplos: 🏠 🛏️ 🚿 🚗 📐 🏢 🌟</p>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Endereço</label>
-                        <input type="text" id="address" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" required>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Descrição</label>
-                        <textarea id="description" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" required></textarea>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Foto Principal (Thumbnail)</label>
-                        <input type="file" id="thumbnail" accept="image/*" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
-                        <p class="text-sm text-gray-500 mt-1">Esta será a foto de capa do imóvel</p>
-                        <div id="thumbnailPreview" class="mt-2"></div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Fotos Adicionais (até 10 imagens)</label>
-                        <div class="space-y-3">
-                            <input type="file" id="photos" multiple accept="image/*" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
-                            <button type="button" onclick="addMorePhotos()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors text-sm font-medium">
-                                + Adicionar Mais Fotos
-                            </button>
+                        <div id="currentImages" class="hidden">
+                            <label class="block text-sm font-medium mb-2">Imagens Atuais</label>
+                            <div class="mb-3">
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Foto Principal:</h4>
+                                <div id="currentThumbnail" class="w-32 h-24"></div>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Galeria:</h4>
+                                <div id="currentImagesGrid" class="grid grid-cols-4 gap-2"></div>
+                            </div>
                         </div>
-                        <p class="text-sm text-gray-500 mt-1">Você pode selecionar várias fotos de uma vez ou adicionar aos poucos (máximo 10 fotos)</p>
-                        <div class="mt-2 p-3 bg-blue-50 rounded-lg">
-                            <p class="text-sm text-blue-700">📸 <span id="photoCount">0</span>/10 fotos adicionadas</p>
-                        </div>
-                        <div id="photoPreview" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4"></div>
                     </div>
-
-                    <button type="submit" class="w-full bg-blue-600 text-white py-4 px-8 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-lg">
-                        Adicionar Imóvel
+                    
+                    <textarea name="features" placeholder="Características (uma por linha)" rows="4" class="w-full p-3 border border-gray-300 rounded-lg"></textarea>
+                    
+                    <button type="submit" id="submitPropertyBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all">
+                        ➕ Adicionar Imóvel
                     </button>
                 </form>
             </div>
 
-            <!-- Properties Management -->
-            <div class="max-w-4xl mx-auto mt-12">
-                <h3 class="text-2xl font-bold mb-6 text-gray-800">Imóveis Cadastrados</h3>
+            <!-- Properties List -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Imóveis Cadastrados</h3>
                 <div id="adminPropertiesList" class="space-y-4">
-                    <!-- Admin properties list will be loaded here -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Property Detail Modal -->
-    <div id="propertyModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50 flex items-center justify-center p-2 sm:p-4">
-        <div class="bg-white rounded-lg max-w-4xl w-full max-h-screen overflow-y-auto">
-            <div class="p-4 sm:p-6">
-                <div class="flex justify-between items-start mb-4 sm:mb-6">
-                    <h2 id="modalTitle" class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 pr-4 leading-tight"></h2>
-                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl sm:text-3xl flex-shrink-0 p-1">&times;</button>
-                </div>
-                
-                <!-- Photo Gallery -->
-                <div id="photoGallery" class="mb-6 sm:mb-8">
-                    <div id="mainPhoto" class="mb-3 sm:mb-4">
-                        <img id="mainPhotoImg" src="" alt="" class="w-full h-48 sm:h-64 lg:h-96 object-cover rounded-lg">
-                    </div>
-                    <div id="thumbnails" class="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-7 gap-1 sm:gap-2">
-                        <!-- Thumbnails will be loaded here -->
-                    </div>
-                </div>
-
-                <!-- Property Details -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-                    <div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Detalhes do Imóvel</h3>
-                        <div id="propertyDetails" class="space-y-2 sm:space-y-3 text-sm sm:text-base">
-                            <!-- Details will be loaded here -->
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Descrição</h3>
-                        <p id="propertyDescription" class="text-gray-600 leading-relaxed text-sm sm:text-base mb-4 sm:mb-6"></p>
-                        
-                        <div class="p-3 sm:p-4 bg-blue-50 rounded-lg">
-                            <h4 class="font-semibold text-blue-800 mb-2 text-sm sm:text-base">Interessado?</h4>
-                            <p class="text-blue-600 mb-3 text-sm sm:text-base">Entre em contato conosco para mais informações!</p>
-                            <button onclick="trackContactClick()" class="w-full sm:w-auto bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-green-700 transition-colors text-base sm:text-lg font-medium flex items-center justify-center gap-2">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-                                </svg>
-                                WhatsApp
-                            </button>
-                        </div>
-                    </div>
+                    <!-- Properties will be listed here -->
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Property data storage
-        let properties = [
-            {
-                id: 1,
-                title: "Casa Moderna em Condomínio",
-                price: "R$ 850.000",
-                type: "casa",
-                transaction: "venda",
-                area: 180,
-                bedrooms: 3,
-                bathrooms: 2,
-                parking: 2,
-                address: "Rua das Flores, 123 - Jardim Primavera",
-                description: "Linda casa moderna em condomínio fechado com área de lazer completa. Acabamentos de primeira qualidade, cozinha planejada, área gourmet e jardim privativo. Localização privilegiada próxima a escolas e shopping centers.",
-                photos: [
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e5e7eb'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ECasa - Fachada%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ESala de Estar%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e5e7eb'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ECozinha%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3EQuarto Principal%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e5e7eb'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3EÁrea Gourmet%3C/text%3E%3C/svg%3E"
-                ]
-            },
-            {
-                id: 2,
-                title: "Apartamento Luxuoso Centro",
-                price: "R$ 650.000",
-                type: "apartamento",
-                transaction: "venda",
-                area: 120,
-                bedrooms: 2,
-                bathrooms: 2,
-                parking: 1,
-                address: "Av. Central, 456 - Centro",
-                description: "Apartamento de alto padrão no centro da cidade com vista panorâmica. Totalmente mobiliado, com varanda gourmet, academia e piscina no prédio. Próximo a bancos, restaurantes e transporte público.",
-                photos: [
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ddd6fe'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3EApartamento - Vista%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e0e7ff'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ESala Integrada%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ddd6fe'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3EVarianda Gourmet%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e0e7ff'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ESuíte Master%3C/text%3E%3C/svg%3E"
-                ]
-            },
-            {
-                id: 3,
-                title: "Sala Comercial Premium",
-                price: "R$ 450.000",
-                type: "comercial",
-                transaction: "venda",
-                area: 85,
-                bedrooms: 0,
-                bathrooms: 2,
-                parking: 2,
-                address: "Ed. Business Center - Av. Empresarial, 789",
-                description: "Sala comercial em edifício corporativo de alto padrão. Ambiente climatizado, recepção 24h, estacionamento privativo e localização estratégica no centro financeiro da cidade.",
-                photos: [
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23fef3c7'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ESala Comercial%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23fed7aa'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ERecepção%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23fef3c7'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ESala de Reunião%3C/text%3E%3C/svg%3E"
-                ]
-            },
-            {
-                id: 4,
-                title: "Casa para Aluguel - Residencial",
-                price: "R$ 2.800/mês",
-                type: "casa",
-                transaction: "aluguel",
-                area: 150,
-                bedrooms: 3,
-                bathrooms: 2,
-                parking: 2,
-                address: "Rua Tranquila, 321 - Bairro Residencial",
-                description: "Casa confortável para locação em bairro residencial tranquilo. Quintal amplo, garagem coberta e próxima a escolas e supermercados. Ideal para famílias.",
-                photos: [
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23dcfce7'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ECasa Aluguel%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23bbf7d0'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3EQuintal%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23dcfce7'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ESala de Estar%3C/text%3E%3C/svg%3E"
-                ]
-            },
-            {
-                id: 5,
-                title: "Apartamento para Aluguel",
-                price: "R$ 1.900/mês",
-                type: "apartamento",
-                transaction: "aluguel",
-                area: 75,
-                bedrooms: 2,
-                bathrooms: 1,
-                parking: 1,
-                address: "Rua dos Estudantes, 159 - Universitário",
-                description: "Apartamento mobiliado próximo à universidade. Ambiente jovem e moderno, com área de lazer no prédio incluindo piscina e churrasqueira.",
-                photos: [
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23fce7f3'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3EApto Universitário%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23fbcfe8'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ESala Compacta%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23fce7f3'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3EQuarto%3C/text%3E%3C/svg%3E"
-                ]
-            },
-            {
-                id: 6,
-                title: "Sala Comercial para Aluguel",
-                price: "R$ 1.200/mês",
-                type: "comercial",
-                transaction: "aluguel",
-                area: 45,
-                bedrooms: 0,
-                bathrooms: 1,
-                parking: 1,
-                address: "Centro Comercial - Rua do Comércio, 567",
-                description: "Sala comercial em centro comercial movimentado. Ideal para escritório, consultório ou pequeno comércio. Ótima localização com fluxo constante de pessoas.",
-                photos: [
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f9ff'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3ESala Comercial%3C/text%3E%3C/svg%3E",
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e0f2fe'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3EEspaço Interno%3C/text%3E%3C/svg%3E"
-                ]
-            }
-        ];
+        // Global variables
+        let properties = JSON.parse(localStorage.getItem('properties')) || [];
+        let isAdminLoggedIn = false;
+        const ADMIN_PASSWORD = 'marcio123'; // Change this password
+        let currentProperty = null;
+        let currentImageIndex = 0;
 
-        // Navigation functions
-        function showSection(sectionName, addToHistory = true) {
-            // Hide all sections
-            document.querySelectorAll('.section-content').forEach(section => {
-                section.classList.add('hidden');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionName).classList.remove('hidden');
-            
-            // Update nav buttons
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-blue-600', 'font-bold');
-                btn.classList.add('text-gray-700');
-            });
-            
-            // Load properties for the section
-            loadPropertiesForSection(sectionName);
-            
-            // Hide mobile menu
-            document.getElementById('mobileMenu').classList.add('hidden');
-            
-            // Add to browser history
-            if (addToHistory) {
-                history.pushState({ section: sectionName }, '', `#${sectionName}`);
-            }
-        }
-
-        // Handle browser back/forward buttons
-        window.addEventListener('popstate', function(event) {
-            if (event.state && event.state.section) {
-                showSection(event.state.section, false);
-            } else {
-                // If no state, go to home
-                showSection('home', false);
-            }
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProperties();
         });
 
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
+        // Property management functions
+        function loadProperties() {
+            const grid = document.getElementById('propertiesGrid');
+            if (!grid) return;
+
+            if (properties.length === 0) {
+                // Add sample properties if none exist
+                properties = [
+                    {
+                        id: 1,
+                        title: "Casa Moderna",
+                        location: "Vila Nova, São Paulo",
+                        price: "R$ 750.000",
+                        type: "casa",
+                        transaction: "venda",
+                        bedrooms: "3 dorms",
+                        bathrooms: "2 banh",
+                        area: "120m²",
+                        description: "Casa moderna com acabamentos de primeira linha, jardim e garagem para 2 carros.",
+                        features: ["Jardim privativo", "Garagem para 2 carros", "Churrasqueira", "Área de serviço"],
+                        images: []
+                    },
+                    {
+                        id: 2,
+                        title: "Apartamento Central",
+                        location: "Centro, São Paulo",
+                        price: "R$ 450.000",
+                        type: "apartamento",
+                        transaction: "compra",
+                        bedrooms: "2 dorms",
+                        bathrooms: "1 banh",
+                        area: "65m²",
+                        description: "Apartamento bem localizado no centro da cidade, próximo ao metrô e comércio.",
+                        features: ["Próximo ao metrô", "Portaria 24h", "Elevador", "Área de lazer"],
+                        images: []
+                    },
+                    {
+                        id: 3,
+                        title: "Sobrado Familiar",
+                        location: "Jardim América, São Paulo",
+                        price: "R$ 2.500/mês",
+                        type: "sobrado",
+                        transaction: "aluguel",
+                        bedrooms: "4 dorms",
+                        bathrooms: "3 banh",
+                        area: "180m²",
+                        description: "Sobrado espaçoso ideal para famílias, com quintal e área gourmet.",
+                        features: ["Quintal amplo", "Área gourmet", "3 vagas de garagem", "Piscina"],
+                        images: []
+                    }
+                ];
+                localStorage.setItem('properties', JSON.stringify(properties));
+            }
+
+            displayProperties(properties);
         }
 
-        // Property loading functions
-        function loadPropertiesForSection(section) {
-            let filteredProperties = [];
+        function displayProperties(propertiesToShow) {
+            const grid = document.getElementById('propertiesGrid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+
+            // Ordenar por destaque primeiro, depois por ID (mais recentes primeiro)
+            const sortedProperties = propertiesToShow.sort((a, b) => {
+                if (a.featured && !b.featured) return -1;
+                if (!a.featured && b.featured) return 1;
+                return b.id - a.id;
+            });
+
+            sortedProperties.forEach(property => {
+                const propertyCard = createPropertyCard(property);
+                grid.appendChild(propertyCard);
+            });
+        }
+
+        function createPropertyCard(property) {
+            const card = document.createElement('div');
+            card.className = 'property-card bg-white rounded-lg shadow-lg overflow-hidden';
             
-            switch(section) {
-                case 'home':
-                    filteredProperties = properties.slice(0, 3); // Featured properties
-                    renderProperties(filteredProperties, 'featuredProperties');
-                    break;
-                case 'casas':
-                    filteredProperties = properties.filter(p => p.type === 'casa');
-                    renderProperties(filteredProperties, 'casasGrid');
-                    break;
-                case 'apartamentos':
-                    filteredProperties = properties.filter(p => p.type === 'apartamento');
-                    renderProperties(filteredProperties, 'apartamentosGrid');
-                    break;
-                case 'comercial':
-                    filteredProperties = properties.filter(p => p.type === 'comercial');
-                    renderProperties(filteredProperties, 'comercialGrid');
-                    break;
-                case 'aluguel':
-                    filteredProperties = properties.filter(p => p.transaction === 'aluguel');
-                    renderProperties(filteredProperties, 'aluguelGrid');
-                    break;
-                case 'venda':
-                    filteredProperties = properties.filter(p => p.transaction === 'venda');
-                    renderProperties(filteredProperties, 'vendaGrid');
-                    break;
-                case 'admin':
-                    checkAdminLogin();
-                    break;
+            const typeEmoji = {
+                'casa': '🏠',
+                'apartamento': '🏢',
+                'terreno': '🌱',
+                'comercial': '🏬',
+                'chacara': '🌳',
+                'sobrado': '🏘️'
+            };
+
+            // Debug: verificar se há imagens
+            console.log('Property:', property.title, 'Images:', property.images?.length || 0);
+
+            let imageHtml = '';
+            if (property.images && property.images.length > 0 && property.images[0]) {
+                imageHtml = `<img src="${property.images[0]}" alt="${property.title}" class="w-full h-48 object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="w-full h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center" style="display:none;">
+                    <span class="text-white text-6xl">${typeEmoji[property.type] || '🏠'}</span>
+                </div>`;
+            } else {
+                imageHtml = `<div class="w-full h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                    <span class="text-white text-6xl">${typeEmoji[property.type] || '🏠'}</span>
+                </div>`;
+            }
+
+            card.innerHTML = `
+                <div class="relative">
+                    ${imageHtml}
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        ${property.transaction.charAt(0).toUpperCase() + property.transaction.slice(1)}
+                    </div>
+                    ${property.featured ? `
+                    <div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        ⭐ Destaque
+                    </div>
+                    ` : ''}
+                </div>
+                <div class="p-6">
+                    <h4 class="text-xl font-semibold mb-2">${property.title}</h4>
+                    <p class="text-gray-600 mb-3">${property.location}</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-blue-600">${property.price}</span>
+                        <div class="flex space-x-4 text-sm text-gray-500">
+                            ${property.bedrooms ? `<span>🛏️ ${property.bedrooms}</span>` : ''}
+                            ${property.bathrooms ? `<span>🚿 ${property.bathrooms}</span>` : ''}
+                            ${property.area ? `<span>📐 ${property.area}</span>` : ''}
+                        </div>
+                    </div>
+                    <button onclick="viewProperty(${property.id})" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors">
+                        Ver Detalhes
+                    </button>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Search and filter functions
+        function searchProperties() {
+            const type = document.getElementById('propertyType').value;
+            const transaction = document.getElementById('transactionType').value;
+            const priceRange = document.getElementById('priceRange').value;
+
+            let filtered = properties;
+
+            if (type) {
+                filtered = filtered.filter(p => p.type === type);
+            }
+
+            if (transaction) {
+                filtered = filtered.filter(p => p.transaction === transaction);
+            }
+
+            if (priceRange) {
+                // Simple price filtering (you can make this more sophisticated)
+                const maxPrice = parseInt(priceRange.replace(/\D/g, ''));
+                filtered = filtered.filter(p => {
+                    const propertyPrice = parseInt(p.price.replace(/\D/g, ''));
+                    return propertyPrice <= maxPrice;
+                });
+            }
+
+            displayProperties(filtered);
+
+            // Track search
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Search');
+            }
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'search', {
+                    'event_category': 'engagement'
+                });
             }
         }
 
-        function renderProperties(propertiesToRender, containerId) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            
-            container.innerHTML = propertiesToRender.map(property => {
-                // Usar ícones e textos personalizados se disponíveis, senão usar padrão
-                const areaIcon = property.areaIcon || '📐';
-                const areaText = property.areaText || 'm²';
-                const bedroomIcon = property.bedroomIcon || '🛏️';
-                const bedroomText = property.bedroomText || '';
-                const bathroomIcon = property.bathroomIcon || '🚿';
-                const bathroomText = property.bathroomText || '';
-                const parkingIcon = property.parkingIcon || '🚗';
-                const parkingText = property.parkingText || '';
-                
-                return `
-                <div class="property-card bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img src="${property.photos[0]}" alt="${property.title}" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-gray-800">${property.title}</h3>
-                        <p class="text-2xl font-bold text-blue-600 mb-3">${property.price}</p>
-                        <p class="text-gray-600 mb-4">${property.address}</p>
-                        <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
-                            <span>${areaIcon} ${property.area}${areaText}</span>
-                            ${property.bedrooms > 0 ? `<span>${bedroomIcon} ${property.bedrooms} ${bedroomText}</span>` : ''}
-                            <span>${bathroomIcon} ${property.bathrooms} ${bathroomText}</span>
-                            <span>${parkingIcon} ${property.parking} ${parkingText}</span>
-                        </div>
-                        <button onclick="showPropertyDetails(${property.id}); trackPropertyView('${property.title}', '${property.type}', '${property.price}')" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-base lg:text-lg font-medium">
-                            Ver Detalhes
-                        </button>
-                    </div>
-                </div>
-                `;
-            }).join('');
+        function filterProperties(transaction) {
+            const filtered = properties.filter(p => p.transaction === transaction);
+            displayProperties(filtered);
         }
 
-        // Property details modal
-        function showPropertyDetails(propertyId) {
-            const property = properties.find(p => p.id === propertyId);
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+            const closeIcon = document.getElementById('closeIcon');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+            const closeIcon = document.getElementById('closeIcon');
+            
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+        }
+
+        // SEO functions
+        function updateSEOForProperty(property) {
+            const title = `${property.title} - ${property.location} | Marcio Ramos Imóveis`;
+            const description = `${property.description} ${property.type} para ${property.transaction} por ${property.price}. ${property.bedrooms || ''} ${property.bathrooms || ''} ${property.area || ''}`.trim();
+            const url = `https://marcioramosimoveis.com.br/imovel/${property.id}`;
+            
+            // Update page title and meta tags
+            document.getElementById('pageTitle').textContent = title;
+            document.getElementById('pageDescription').setAttribute('content', description);
+            document.getElementById('canonical').setAttribute('href', url);
+            
+            // Update Open Graph tags
+            document.getElementById('ogTitle').setAttribute('content', title);
+            document.getElementById('ogDescription').setAttribute('content', description);
+            document.getElementById('ogUrl').setAttribute('content', url);
+            
+            // Update Twitter tags
+            document.getElementById('twitterTitle').setAttribute('content', title);
+            document.getElementById('twitterDescription').setAttribute('content', description);
+            document.getElementById('twitterUrl').setAttribute('content', url);
+            
+            // Update structured data
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "RealEstate",
+                "name": property.title,
+                "description": property.description,
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": property.location
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "price": property.price,
+                    "priceCurrency": "BRL",
+                    "availability": "https://schema.org/InStock"
+                },
+                "realEstateAgent": {
+                    "@type": "RealEstateAgent",
+                    "name": "Marcio Ramos Imóveis"
+                }
+            };
+            
+            document.getElementById('structuredData').textContent = JSON.stringify(structuredData);
+            
+            // Update browser history
+            if (history.pushState) {
+                history.pushState({propertyId: property.id}, title, `#imovel-${property.id}`);
+            }
+        }
+
+        function resetSEO() {
+            const title = 'Marcio Ramos Imóveis - Sua Imobiliária Digital';
+            const description = 'Encontre os melhores imóveis com Marcio Ramos, corretor especialista há 15 anos. Casas, apartamentos, terrenos para compra, venda e aluguel.';
+            const url = 'https://marcioramosimoveis.com.br';
+            
+            document.getElementById('pageTitle').textContent = title;
+            document.getElementById('pageDescription').setAttribute('content', description);
+            document.getElementById('canonical').setAttribute('href', url);
+            document.getElementById('ogTitle').setAttribute('content', title);
+            document.getElementById('ogDescription').setAttribute('content', description);
+            document.getElementById('ogUrl').setAttribute('content', url);
+            document.getElementById('twitterTitle').setAttribute('content', title);
+            document.getElementById('twitterDescription').setAttribute('content', description);
+            document.getElementById('twitterUrl').setAttribute('content', url);
+            
+            const originalStructuredData = {
+                "@context": "https://schema.org",
+                "@type": "RealEstateAgent",
+                "name": "Marcio Ramos Imóveis",
+                "description": "Corretor de imóveis especialista há mais de 15 anos",
+                "url": "https://marcioramosimoveis.com.br",
+                "telephone": "+55-11-99999-9999",
+                "email": "marcio@marcioramosimoveis.com.br",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Rua das Flores, 123",
+                    "addressLocality": "São Paulo",
+                    "addressRegion": "SP",
+                    "postalCode": "01000-000",
+                    "addressCountry": "BR"
+                },
+                "sameAs": [
+                    "https://www.facebook.com/marcioramosimoveis",
+                    "https://www.instagram.com/marcioramosimoveis"
+                ]
+            };
+            
+            document.getElementById('structuredData').textContent = JSON.stringify(originalStructuredData);
+            
+            if (history.pushState) {
+                history.pushState({}, title, window.location.pathname);
+            }
+        }
+
+        // Image validation and preview functions
+        function validateGalleryCount(input) {
+            if (input.files.length > 11) {
+                alert('Máximo de 11 imagens na galeria!');
+                input.value = '';
+                return false;
+            }
+            return true;
+        }
+
+        function previewThumbnail(input) {
+            const preview = document.getElementById('thumbnailPreview');
+            const previewImg = document.getElementById('thumbnailPreviewImg');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    preview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.classList.add('hidden');
+            }
+        }
+
+        function previewGalleryImages(input) {
+            const preview = document.getElementById('galleryPreview');
+            const previewGrid = document.getElementById('galleryPreviewGrid');
+            
+            // Validate count first
+            if (!validateGalleryCount(input)) {
+                return;
+            }
+            
+            if (input.files && input.files.length > 0) {
+                previewGrid.innerHTML = '';
+                
+                Array.from(input.files).forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imgDiv = document.createElement('div');
+                        imgDiv.className = 'relative border-2 border-green-500 rounded overflow-hidden';
+                        imgDiv.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview ${index + 1}" class="w-full h-20 object-cover">
+                            <div class="absolute bottom-0 left-0 bg-green-500 text-white text-xs px-1 rounded-tr">NOVA</div>
+                        `;
+                        previewGrid.appendChild(imgDiv);
+                    };
+                    reader.readAsDataURL(file);
+                });
+                
+                preview.classList.remove('hidden');
+            } else {
+                preview.classList.add('hidden');
+            }
+        }
+
+        // Gallery navigation functions
+        function selectImage(index) {
+            if (!currentProperty || !currentProperty.images) return;
+            
+            currentImageIndex = index;
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.gallery-thumbnail');
+            
+            if (mainImage) {
+                mainImage.src = currentProperty.images[index];
+            }
+            
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        }
+
+        function previousImage() {
+            if (!currentProperty || !currentProperty.images) return;
+            
+            currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : currentProperty.images.length - 1;
+            selectImage(currentImageIndex);
+        }
+
+        function nextImage() {
+            if (!currentProperty || !currentProperty.images) return;
+            
+            currentImageIndex = currentImageIndex < currentProperty.images.length - 1 ? currentImageIndex + 1 : 0;
+            selectImage(currentImageIndex);
+        }
+
+        // Property modal functions
+        function viewProperty(id) {
+            const property = properties.find(p => p.id === id);
             if (!property) return;
 
+            currentProperty = property;
+            currentImageIndex = 0;
+
+            // Update SEO for this property
+            updateSEOForProperty(property);
+
+            // Track property view
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'ViewContent', {
+                    content_name: property.title,
+                    content_category: 'Property'
+                });
+            }
+
             document.getElementById('modalTitle').textContent = property.title;
-            document.getElementById('propertyDescription').textContent = property.description;
             
-            // Load main photo
-            document.getElementById('mainPhotoImg').src = property.photos[0];
-            document.getElementById('mainPhotoImg').alt = property.title;
-            
-            // Load thumbnails
-            const thumbnailsContainer = document.getElementById('thumbnails');
-            thumbnailsContainer.innerHTML = property.photos.map((photo, index) => `
-                <img src="${photo}" alt="Foto ${index + 1}" 
-                     class="w-full h-16 object-cover rounded cursor-pointer gallery-image ${index === 0 ? 'ring-2 ring-blue-500' : ''}"
-                     onclick="changeMainPhoto('${photo}', this)">
-            `).join('');
-            
-            // Load property details
-            const detailsContainer = document.getElementById('propertyDetails');
-            detailsContainer.innerHTML = `
-                <div class="flex justify-between py-2 border-b">
-                    <span class="font-medium">Preço:</span>
-                    <span class="text-blue-600 font-bold">${property.price}</span>
+            let galleryHtml = '';
+            if (property.images && property.images.length > 0) {
+                galleryHtml = `
+                    <div class="image-gallery mb-4">
+                        <div class="relative">
+                            <img id="mainImage" src="${property.images[0]}" alt="${property.title}" class="w-full h-80 object-cover rounded-lg gallery-main-image">
+                            ${property.images.length > 1 ? `
+                                <button class="gallery-nav-btn prev" onclick="previousImage()">‹</button>
+                                <button class="gallery-nav-btn next" onclick="nextImage()">›</button>
+                            ` : ''}
+                        </div>
+                        ${property.images.length > 1 ? `
+                            <div class="grid grid-cols-6 gap-2 mt-3">
+                                ${property.images.map((img, index) => `
+                                    <div class="relative group">
+                                        <img src="${img}" alt="Foto ${index + 1}" 
+                                             class="w-full h-16 object-cover rounded gallery-thumbnail ${index === 0 ? 'active' : ''}" 
+                                             onclick="selectImage(${index})">
+                                        ${isAdminLoggedIn ? `
+                                            <button onclick="event.stopPropagation(); removeImageFromModal(${property.id}, ${index});" 
+                                                    class="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-6 h-6 text-sm hover:scale-110 opacity-0 group-hover:opacity-100 transition-all z-50 flex items-center justify-center font-bold shadow-xl border-2 border-white cursor-pointer"
+                                                    title="🗑️ Remover esta foto">
+                                                ✕
+                                            </button>
+                                        ` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            } else {
+                const typeEmoji = {
+                    'casa': '🏠',
+                    'apartamento': '🏢',
+                    'terreno': '🌱',
+                    'comercial': '🏬',
+                    'chacara': '🌳',
+                    'sobrado': '🏘️'
+                };
+                galleryHtml = `<div class="w-full h-80 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mb-4">
+                    <span class="text-white text-8xl">${typeEmoji[property.type] || '🏠'}</span>
+                </div>`;
+            }
+
+            document.getElementById('modalContent').innerHTML = `
+                ${galleryHtml}
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div><strong>Localização:</strong> ${property.location}</div>
+                    <div><strong>Preço:</strong> ${property.price}</div>
+                    <div><strong>Tipo:</strong> ${property.type.charAt(0).toUpperCase() + property.type.slice(1)}</div>
+                    <div><strong>Transação:</strong> ${property.transaction.charAt(0).toUpperCase() + property.transaction.slice(1)}</div>
+                    ${property.bedrooms ? `<div><strong>Dormitórios:</strong> ${property.bedrooms}</div>` : ''}
+                    ${property.bathrooms ? `<div><strong>Banheiros:</strong> ${property.bathrooms}</div>` : ''}
+                    ${property.area ? `<div><strong>Área:</strong> ${property.area}</div>` : ''}
                 </div>
-                <div class="flex justify-between py-2 border-b">
-                    <span class="font-medium">Tipo:</span>
-                    <span class="capitalize">${property.type}</span>
+                <div class="mb-4">
+                    <strong>Descrição:</strong>
+                    <p class="mt-2 text-gray-600">${property.description}</p>
                 </div>
-                <div class="flex justify-between py-2 border-b">
-                    <span class="font-medium">Transação:</span>
-                    <span class="capitalize">${property.transaction}</span>
+                ${property.features && property.features.length > 0 ? `
+                <div>
+                    <strong>Características:</strong>
+                    <ul class="mt-2 list-disc list-inside text-gray-600">
+                        ${property.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
                 </div>
-                <div class="flex justify-between py-2 border-b">
-                    <span class="font-medium">Área:</span>
-                    <span>${property.area}m²</span>
-                </div>
-                ${property.bedrooms > 0 ? `
-                <div class="flex justify-between py-2 border-b">
-                    <span class="font-medium">Quartos:</span>
-                    <span>${property.bedrooms}</span>
-                </div>` : ''}
-                <div class="flex justify-between py-2 border-b">
-                    <span class="font-medium">Banheiros:</span>
-                    <span>${property.bathrooms}</span>
-                </div>
-                <div class="flex justify-between py-2 border-b">
-                    <span class="font-medium">Vagas:</span>
-                    <span>${property.parking}</span>
-                </div>
-                <div class="flex justify-between py-2">
-                    <span class="font-medium">Endereço:</span>
-                    <span class="text-right">${property.address}</span>
-                </div>
+                ` : ''}
             `;
             
             document.getElementById('propertyModal').classList.remove('hidden');
         }
 
-        function changeMainPhoto(photoSrc, thumbnail) {
-            document.getElementById('mainPhotoImg').src = photoSrc;
-            
-            // Update thumbnail selection
-            document.querySelectorAll('#thumbnails img').forEach(img => {
-                img.classList.remove('ring-2', 'ring-blue-500');
-            });
-            thumbnail.classList.add('ring-2', 'ring-blue-500');
-        }
-
         function closeModal() {
             document.getElementById('propertyModal').classList.add('hidden');
+            resetSEO(); // Reset SEO when closing modal
         }
 
-        // Admin login functions
-        async function checkAdminLogin() {
-            const { data: { session } } = await supabase.auth.getSession();
-            
-            if (session) {
-                showAdminContent();
-            } else {
-                showAdminLogin();
-            }
-        }
-
+        // Admin functions
         function showAdminLogin() {
-            document.getElementById('adminLogin').classList.remove('hidden');
-            document.getElementById('adminContent').classList.add('hidden');
+            document.getElementById('adminLoginModal').classList.remove('hidden');
         }
 
-        function showAdminContent() {
-            document.getElementById('adminLogin').classList.add('hidden');
-            document.getElementById('adminContent').classList.remove('hidden');
+        function closeAdminLogin() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function adminLogin(event) {
+            event.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                closeAdminLogin();
+                showAdminPanel();
+            } else {
+                alert('Senha incorreta!');
+            }
+        }
+
+        function showAdminPanel() {
+            document.getElementById('adminPanel').classList.remove('hidden');
             loadAdminProperties();
+            updatePixelStatus();
         }
 
-        async function logoutAdmin() {
-            const { error } = await supabase.auth.signOut();
-            if (error) console.error('Error logging out:', error);
-            showAdminLogin();
-            document.getElementById('propertyForm').reset();
-            document.getElementById('photoPreview').innerHTML = '';
-            document.getElementById('thumbnailPreview').innerHTML = '';
-            currentPhotos = [];
-            updatePhotoCount();
-        }
-
-        // Função para enviar o link mágico
-      async function enviarMagicLink() {
-  const email = document.getElementById('email').value;
-  
-  const { error } = await window.supabase.auth.signInWithOtp({
-    email: email,
-    options: {
-      emailRedirectTo: window.location.href
-    }
-  });
-
-  if (error) {
-    alert("Erro: " + error.message);
-  } else {
-    alert("Link enviado para " + email);
-  }
-}
-
-        function showMessage(element, message, type) {
-            element.textContent = message;
-            element.className = 'mt-4 p-3 rounded-lg ' + 
-                (type === 'error' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700');
-            element.classList.remove('hidden');
-        }
-
-        // Variável global para armazenar fotos
-        let currentPhotos = [];
-
-        // Thumbnail preview for admin form
-        document.getElementById('thumbnail').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            const previewContainer = document.getElementById('thumbnailPreview');
+        // Pixel installation functions
+        function installPixel(type) {
+            let pixelId, inputId;
             
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewContainer.innerHTML = `
-                        <div class="mt-2">
-                            <img src="${e.target.result}" alt="Thumbnail Preview" class="w-32 h-24 object-cover rounded-lg border-2 border-blue-300">
-                            <p class="text-sm text-green-600 mt-1">✓ Foto principal carregada</p>
-                        </div>
-                    `;
-                };
-                reader.readAsDataURL(file);
-            } else {
-                previewContainer.innerHTML = '';
-            }
-        });
-
-        // Função para adicionar mais fotos
-        function addMorePhotos() {
-            if (currentPhotos.length >= 10) {
-                alert('Máximo de 10 fotos atingido!');
-                return;
+            switch(type) {
+                case 'meta':
+                    pixelId = document.getElementById('metaPixelInput').value.trim();
+                    if (!pixelId) {
+                        alert('Por favor, insira o ID do Meta Pixel');
+                        return;
+                    }
+                    localStorage.setItem('metaPixelId', pixelId);
+                    installMetaPixel(pixelId);
+                    break;
+                    
+                case 'ga':
+                    pixelId = document.getElementById('googleAnalyticsInput').value.trim();
+                    if (!pixelId) {
+                        alert('Por favor, insira o ID do Google Analytics');
+                        return;
+                    }
+                    localStorage.setItem('googleAnalyticsId', pixelId);
+                    installGoogleAnalytics(pixelId);
+                    break;
+                    
+                case 'gtm':
+                    pixelId = document.getElementById('googleTagManagerInput').value.trim();
+                    if (!pixelId) {
+                        alert('Por favor, insira o ID do Google Tag Manager');
+                        return;
+                    }
+                    localStorage.setItem('googleTagManagerId', pixelId);
+                    installGoogleTagManager(pixelId);
+                    break;
             }
             
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.multiple = true;
-            input.accept = 'image/*';
-            input.style.display = 'none';
-            
-            input.addEventListener('change', function(e) {
-                const files = Array.from(e.target.files);
-                const remainingSlots = 10 - currentPhotos.length;
-                const filesToProcess = files.slice(0, remainingSlots);
-                
-                if (files.length > remainingSlots) {
-                    alert(`Só é possível adicionar mais ${remainingSlots} fotos. ${files.length - remainingSlots} fotos foram ignoradas.`);
-                }
-                
-                filesToProcess.forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        currentPhotos.push(e.target.result);
-                        updatePhotoPreview();
-                        updatePhotoCount();
-                    };
-                    reader.readAsDataURL(file);
-                });
-            });
-            
-            document.body.appendChild(input);
-            input.click();
-            document.body.removeChild(input);
+            updatePixelStatus();
+            alert(`${type.toUpperCase()} instalado com sucesso! ID: ${pixelId}`);
         }
 
-        // Função para atualizar preview das fotos
-        function updatePhotoPreview() {
-            const previewContainer = document.getElementById('photoPreview');
-            previewContainer.innerHTML = '';
-            
-            currentPhotos.forEach((photo, index) => {
-                const photoDiv = document.createElement('div');
-                photoDiv.className = 'relative';
-                photoDiv.innerHTML = `
-                    <img src="${photo}" alt="Foto ${index + 1}" class="w-full h-24 object-cover rounded-lg">
-                    <button type="button" onclick="removePhoto(${index})" class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600">×</button>
+        function updatePixelStatus() {
+            // Meta Pixel Status
+            const metaPixelId = localStorage.getItem('metaPixelId');
+            const metaStatus = document.getElementById('metaPixelStatus');
+            if (metaPixelId && metaPixelId !== 'SEU_PIXEL_ID_AQUI' && typeof fbq !== 'undefined') {
+                metaStatus.innerHTML = `
+                    <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                    <span>Meta Pixel: Ativo (${metaPixelId})</span>
                 `;
-                previewContainer.appendChild(photoDiv);
-            });
-        }
-
-        // Função para remover foto
-        function removePhoto(index) {
-            currentPhotos.splice(index, 1);
-            updatePhotoPreview();
-            updatePhotoCount();
-        }
-
-        // Função para atualizar contador de fotos
-        function updatePhotoCount() {
-            document.getElementById('photoCount').textContent = currentPhotos.length;
-        }
-
-        // Additional photos preview for admin form
-        document.getElementById('photos').addEventListener('change', function(e) {
-            const files = Array.from(e.target.files);
-            const remainingSlots = 10 - currentPhotos.length;
-            const filesToProcess = files.slice(0, remainingSlots);
-            
-            if (files.length > remainingSlots) {
-                alert(`Só é possível adicionar mais ${remainingSlots} fotos. ${files.length - remainingSlots} fotos foram ignoradas.`);
-            }
-            
-            filesToProcess.forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    currentPhotos.push(e.target.result);
-                    updatePhotoPreview();
-                    updatePhotoCount();
-                };
-                reader.readAsDataURL(file);
-            });
-            
-            // Limpar o input para permitir adicionar as mesmas fotos novamente se necessário
-            this.value = '';
-        });
-
-        // Property form submission
-        document.getElementById('propertyForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const isEditing = this.dataset.editing;
-            const thumbnailFile = document.getElementById('thumbnail').files[0];
-            
-            // Create property object
-            const propertyData = {
-                title: document.getElementById('title').value,
-                price: document.getElementById('price').value,
-                type: document.getElementById('type').value,
-                transaction: document.getElementById('transaction').value,
-                area: parseInt(document.getElementById('area').value),
-                bedrooms: parseInt(document.getElementById('bedrooms').value) || 0,
-                bathrooms: parseInt(document.getElementById('bathrooms').value) || 0,
-                parking: parseInt(document.getElementById('parking').value) || 0,
-                address: document.getElementById('address').value,
-                description: document.getElementById('description').value,
-                // Salvar ícones e textos personalizados
-                areaIcon: document.getElementById('areaIcon').value || '📐',
-                areaText: document.getElementById('areaText').value || 'm²',
-                bedroomIcon: document.getElementById('bedroomIcon').value || '🛏️',
-                bedroomText: document.getElementById('bedroomText').value || '',
-                bathroomIcon: document.getElementById('bathroomIcon').value || '🚿',
-                bathroomText: document.getElementById('bathroomText').value || '',
-                parkingIcon: document.getElementById('parkingIcon').value || '🚗',
-                parkingText: document.getElementById('parkingText').value || '',
-                photos: []
-            };
-            
-            // Process thumbnail first
-            if (thumbnailFile) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    // Adicionar thumbnail como primeira foto
-                    propertyData.photos = [e.target.result, ...currentPhotos];
-                    finishPropertySubmission();
-                };
-                reader.readAsDataURL(thumbnailFile);
             } else {
-                // Se não há thumbnail novo, usar as fotos existentes
-                if (currentPhotos.length > 0) {
-                    propertyData.photos = [...currentPhotos];
-                } else {
-                    // Placeholder se não há fotos
-                    propertyData.photos = [
-                        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e5e7eb'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-size='16'%3EImóvel sem foto%3C/text%3E%3C/svg%3E"
-                    ];
-                }
-                finishPropertySubmission();
+                metaStatus.innerHTML = `
+                    <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                    <span>Meta Pixel: Não instalado</span>
+                `;
             }
             
-            function finishPropertySubmission() {
-                if (isEditing) {
-                    // Atualizar imóvel existente
-                    const propertyIndex = properties.findIndex(p => p.id == isEditing);
-                    if (propertyIndex !== -1) {
-                        propertyData.id = parseInt(isEditing);
-                        properties[propertyIndex] = propertyData;
-                        alert('Imóvel atualizado com sucesso!');
-                    }
-                    
-                    // Resetar modo de edição
-                    delete document.getElementById('propertyForm').dataset.editing;
-                    const submitBtn = document.querySelector('#propertyForm button[type="submit"]');
-                    submitBtn.textContent = 'Adicionar Imóvel';
-                    submitBtn.className = 'w-full bg-blue-600 text-white py-4 px-8 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-lg';
-                } else {
-                    // Adicionar novo imóvel
-                    propertyData.id = properties.length > 0 ? Math.max(...properties.map(p => p.id)) + 1 : 1;
-                    properties.push(propertyData);
-                    
-                    // Track conversion events
-                    if (typeof fbq !== 'undefined') {
-                        fbq('track', 'Lead', {
-                            content_name: propertyData.title,
-                            content_category: propertyData.type,
-                            value: parseFloat(propertyData.price.replace(/[^\d,]/g, '').replace(',', '.')),
-                            currency: 'BRL'
-                        });
-                    }
-                    
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'property_added', {
-                            'event_category': 'real_estate',
-                            'event_label': propertyData.type,
-                            'value': parseFloat(propertyData.price.replace(/[^\d,]/g, '').replace(',', '.'))
-                        });
-                    }
-                    
-                    alert('Imóvel adicionado com sucesso!');
-                }
-                
-                // Limpar formulário
-                document.getElementById('propertyForm').reset();
-                document.getElementById('photoPreview').innerHTML = '';
-                document.getElementById('thumbnailPreview').innerHTML = '';
-                currentPhotos = [];
-                updatePhotoCount();
-                loadAdminProperties();
+            // Google Analytics Status
+            const gaId = localStorage.getItem('googleAnalyticsId');
+            const gaStatus = document.getElementById('gaStatus');
+            if (gaId && gaId !== 'GA_MEASUREMENT_ID' && typeof gtag !== 'undefined') {
+                gaStatus.innerHTML = `
+                    <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                    <span>Google Analytics: Ativo (${gaId})</span>
+                `;
+            } else {
+                gaStatus.innerHTML = `
+                    <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                    <span>Google Analytics: Não instalado</span>
+                `;
             }
-        });
+            
+            // GTM Status
+            const gtmId = localStorage.getItem('googleTagManagerId');
+            const gtmStatus = document.getElementById('gtmStatus');
+            if (gtmId && gtmId !== 'GTM-XXXXXXX' && window.dataLayer) {
+                gtmStatus.innerHTML = `
+                    <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                    <span>GTM: Ativo (${gtmId})</span>
+                `;
+            } else {
+                gtmStatus.innerHTML = `
+                    <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                    <span>GTM: Não instalado</span>
+                `;
+            }
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').classList.add('hidden');
+            isAdminLoggedIn = false;
+        }
 
         function loadAdminProperties() {
-            const container = document.getElementById('adminPropertiesList');
-            container.innerHTML = properties.map(property => `
-                <div class="bg-white rounded-lg shadow p-6 flex justify-between items-center">
+            const list = document.getElementById('adminPropertiesList');
+            list.innerHTML = '';
+
+            properties.forEach(property => {
+                const item = document.createElement('div');
+                item.className = 'border border-gray-200 rounded-lg p-4 flex justify-between items-center';
+                item.innerHTML = `
                     <div>
-                        <h4 class="font-bold text-lg">${property.title}</h4>
-                        <p class="text-gray-600">${property.price} - ${property.type} (${property.transaction})</p>
-                        <p class="text-sm text-gray-500">${property.address}</p>
+                        <h4 class="font-semibold flex items-center space-x-2">
+                            <span>${property.title}</span>
+                            ${property.featured ? '<span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">⭐ Destaque</span>' : ''}
+                        </h4>
+                        <p class="text-gray-600">${property.location} - ${property.price}</p>
                     </div>
-                    <div class="flex space-x-3">
-                        <button onclick="editProperty(${property.id})" class="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition-colors text-base font-medium">
+                    <div class="flex space-x-2">
+                        <button onclick="editProperty(${property.id})" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
                             Editar
                         </button>
-                        <button onclick="deleteProperty(${property.id})" class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors text-base font-medium">
+                        <button onclick="duplicateProperty(${property.id})" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">
+                            Duplicar
+                        </button>
+                        <button onclick="deleteProperty(${property.id})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
                             Excluir
                         </button>
                     </div>
-                </div>
-            `).join('');
-        }
-
-        function editProperty(propertyId) {
-            const property = properties.find(p => p.id === propertyId);
-            if (!property) return;
-            
-            // Preencher o formulário com os dados existentes
-            document.getElementById('title').value = property.title;
-            document.getElementById('price').value = property.price;
-            document.getElementById('type').value = property.type;
-            document.getElementById('transaction').value = property.transaction;
-            document.getElementById('area').value = property.area;
-            document.getElementById('bedrooms').value = property.bedrooms;
-            document.getElementById('bathrooms').value = property.bathrooms;
-            document.getElementById('parking').value = property.parking;
-            document.getElementById('address').value = property.address;
-            document.getElementById('description').value = property.description;
-            
-            // Preencher campos de ícones e textos personalizados
-            document.getElementById('areaIcon').value = property.areaIcon || '📐';
-            document.getElementById('areaText').value = property.areaText || 'm²';
-            document.getElementById('bedroomIcon').value = property.bedroomIcon || '🛏️';
-            document.getElementById('bedroomText').value = property.bedroomText || '';
-            document.getElementById('bathroomIcon').value = property.bathroomIcon || '🚿';
-            document.getElementById('bathroomText').value = property.bathroomText || '';
-            document.getElementById('parkingIcon').value = property.parkingIcon || '🚗';
-            document.getElementById('parkingText').value = property.parkingText || '';
-            
-            // Mostrar fotos existentes
-            const photoPreview = document.getElementById('photoPreview');
-            photoPreview.innerHTML = '';
-            currentPhotos = property.photos.slice(1); // Todas exceto a primeira (thumbnail)
-            
-            property.photos.slice(1).forEach((photo, index) => {
-                const photoDiv = document.createElement('div');
-                photoDiv.className = 'relative';
-                photoDiv.innerHTML = `
-                    <img src="${photo}" alt="Foto ${index + 1}" class="w-full h-24 object-cover rounded-lg">
-                    <button type="button" onclick="removePhoto(${index})" class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600">×</button>
                 `;
-                photoPreview.appendChild(photoDiv);
+                list.appendChild(item);
             });
-            
-            updatePhotoCount();
-            
-            // Mostrar thumbnail existente
-            const thumbnailPreview = document.getElementById('thumbnailPreview');
-            thumbnailPreview.innerHTML = `
-                <div class="mt-2">
-                    <img src="${property.photos[0]}" alt="Thumbnail Preview" class="w-32 h-24 object-cover rounded-lg border-2 border-blue-300">
-                    <p class="text-sm text-green-600 mt-1">✓ Foto principal carregada</p>
-                </div>
-            `;
-            
-            // Alterar o botão de submit
-            const submitBtn = document.querySelector('#propertyForm button[type="submit"]');
-            submitBtn.textContent = 'Atualizar Imóvel';
-            submitBtn.className = 'w-full bg-orange-600 text-white py-4 px-8 rounded-lg font-semibold hover:bg-orange-700 transition-colors text-lg';
-            
-            // Marcar como edição
-            document.getElementById('propertyForm').dataset.editing = propertyId;
-            
-            // Scroll para o formulário
-            document.getElementById('propertyForm').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function deleteProperty(propertyId) {
-            if (confirm('Tem certeza que deseja excluir este imóvel?')) {
-                properties = properties.filter(p => p.id !== propertyId);
+        function addProperty(event) {
+            event.preventDefault();
+            console.log('🏠 INICIANDO PROCESSO DE ADIÇÃO/ATUALIZAÇÃO');
+            
+            const form = event.target;
+            const formData = new FormData(form);
+
+            // Verificar se estamos editando ou adicionando
+            const editingId = form.dataset.editingId;
+            
+            if (editingId) {
+                console.log('✏️ MODO EDIÇÃO DETECTADO - ID:', editingId);
+                // Estamos editando
+                updateProperty(parseInt(editingId), formData, form);
+                return;
+            }
+
+            console.log('➕ MODO ADIÇÃO DETECTADO');
+
+            // Estamos adicionando novo imóvel
+            const newProperty = {
+                id: Date.now(),
+                title: formData.get('title'),
+                location: formData.get('location'),
+                price: formData.get('price'),
+                type: formData.get('type'),
+                transaction: formData.get('transaction'),
+                area: formData.get('area'),
+                bedrooms: formData.get('bedrooms'),
+                bathrooms: formData.get('bathrooms'),
+                description: formData.get('description'),
+                features: formData.get('features').split('\n').filter(f => f.trim()),
+                featured: formData.get('featured') === 'on',
+                images: []
+            };
+
+            console.log('📝 Novo imóvel criado:', newProperty.title);
+            console.log('⭐ Destaque:', newProperty.featured);
+
+            const allFiles = [];
+            
+            // Coletar thumbnail primeiro
+            const thumbnailFile = formData.get('thumbnailImage');
+            if (thumbnailFile && thumbnailFile.size > 0) {
+                console.log('🖼️ Thumbnail detectada');
+                allFiles.push(thumbnailFile);
+            }
+
+            // Coletar arquivos da galeria
+            const galleryFiles = formData.getAll('galleryImages');
+            if (galleryFiles && galleryFiles.length > 0) {
+                galleryFiles.forEach(file => {
+                    if (file.size > 0 && allFiles.length < 12) { // Máximo 12 imagens total
+                        console.log('🖼️ Imagem da galeria detectada');
+                        allFiles.push(file);
+                    }
+                });
+            }
+
+            console.log('📁 Total de arquivos para processar:', allFiles.length);
+
+            if (allFiles.length > 0) {
+                let processedCount = 0;
+                
+                allFiles.forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newProperty.images.push(e.target.result);
+                        processedCount++;
+                        console.log(`📊 Imagem processada: ${processedCount}/${allFiles.length}`);
+                        
+                        if (processedCount === allFiles.length) {
+                            saveProperty();
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                console.log('💾 Salvando sem imagens');
+                saveProperty();
+            }
+
+            function saveProperty() {
+                console.log('💾 SALVANDO NOVO IMÓVEL');
+                
+                properties.push(newProperty);
+                localStorage.setItem('properties', JSON.stringify(properties));
+                
+                console.log('✅ Imóvel salvo no localStorage');
+                console.log('📊 Total de imóveis:', properties.length);
+                
+                // Forçar atualização da página
+                loadProperties();
                 loadAdminProperties();
-                alert('Imóvel excluído com sucesso!');
+                
+                console.log('🔄 Displays atualizados');
+                
+                form.reset();
+                
+                // Esconder previews após salvar
+                document.getElementById('thumbnailPreview').classList.add('hidden');
+                document.getElementById('galleryPreview').classList.add('hidden');
+                
+                console.log('✅ NOVO IMÓVEL ADICIONADO COM SUCESSO!');
+                alert('Imóvel adicionado com sucesso!');
             }
         }
 
-        // Tracking functions
-        function trackPropertyView(title, type, price) {
-            // Facebook Pixel tracking
+        function editProperty(id) {
+            console.log('✏️ INICIANDO EDIÇÃO - ID:', id);
+            
+            const property = properties.find(p => p.id === id);
+            if (!property) {
+                console.error('❌ Propriedade não encontrada');
+                return;
+            }
+
+            console.log('📝 Propriedade encontrada:', property.title);
+
+            // Alterar título do formulário
+            document.getElementById('formTitle').textContent = 'Editar Imóvel';
+
+            // Preencher o formulário com os dados do imóvel
+            const form = document.getElementById('addPropertyForm');
+            
+            // LIMPAR CAMPOS DE ARQUIVO PRIMEIRO
+            const thumbnailInput = form.querySelector('input[name="thumbnailImage"]');
+            const galleryInput = form.querySelector('input[name="galleryImages"]');
+            if (thumbnailInput) thumbnailInput.value = '';
+            if (galleryInput) galleryInput.value = '';
+            
+            // Esconder previews
+            document.getElementById('thumbnailPreview').classList.add('hidden');
+            document.getElementById('galleryPreview').classList.add('hidden');
+            
+            form.elements.title.value = property.title;
+            form.elements.location.value = property.location;
+            form.elements.price.value = property.price;
+            form.elements.type.value = property.type;
+            form.elements.transaction.value = property.transaction;
+            form.elements.area.value = property.area || '';
+            form.elements.bedrooms.value = property.bedrooms || '';
+            form.elements.bathrooms.value = property.bathrooms || '';
+            form.elements.description.value = property.description;
+            form.elements.features.value = property.features ? property.features.join('\n') : '';
+            form.elements.featured.checked = property.featured || false;
+
+            // Marcar que estamos editando
+            form.dataset.editingId = id;
+
+            console.log('📊 Formulário preenchido');
+
+            // Mostrar imagens atuais usando a função dedicada
+            updateCurrentImagesDisplay(id);
+
+            // Alterar o botão para "Atualizar" específico para este imóvel
+            const submitBtn = form.querySelector('#submitPropertyBtn');
+            submitBtn.innerHTML = `🔄 Atualizar "${property.title}"`;
+            submitBtn.className = 'w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-all';
+            
+            // Adicionar botão cancelar se não existir
+            let cancelBtn = form.querySelector('.cancel-edit-btn');
+            if (!cancelBtn) {
+                cancelBtn = document.createElement('button');
+                cancelBtn.type = 'button';
+                cancelBtn.className = 'cancel-edit-btn w-full bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-semibold mt-2 transition-all';
+                cancelBtn.innerHTML = '❌ Cancelar Edição';
+                cancelBtn.onclick = function() {
+                    cancelEdit(form);
+                };
+                submitBtn.parentNode.insertBefore(cancelBtn, submitBtn.nextSibling);
+            }
+
+            console.log('✅ Modo de edição ativado');
+
+            // Scroll para o formulário
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function removeImage(propertyId, imageIndex) {
+            console.log('🗑️ REMOVENDO IMAGEM - ID:', propertyId, 'Index:', imageIndex);
+            
+            if (!confirm('❌ Remover esta imagem permanentemente?')) {
+                console.log('❌ Remoção cancelada pelo usuário');
+                return;
+            }
+            
+            try {
+                const propertyIndex = properties.findIndex(p => p.id === propertyId);
+                console.log('📍 Property index encontrado:', propertyIndex);
+                
+                if (propertyIndex === -1) {
+                    throw new Error('Propriedade não encontrada');
+                }
+                
+                if (!properties[propertyIndex].images || !Array.isArray(properties[propertyIndex].images)) {
+                    throw new Error('Array de imagens não existe');
+                }
+                
+                if (imageIndex < 0 || imageIndex >= properties[propertyIndex].images.length) {
+                    throw new Error(`Índice inválido: ${imageIndex}. Array tem ${properties[propertyIndex].images.length} itens`);
+                }
+                
+                console.log('🔍 Antes da remoção:', properties[propertyIndex].images.length, 'imagens');
+                console.log('🎯 Removendo índice:', imageIndex);
+                
+                // REMOVER A IMAGEM DO ARRAY
+                const removedImage = properties[propertyIndex].images.splice(imageIndex, 1);
+                console.log('✂️ Imagem removida:', removedImage.length > 0 ? 'Sucesso' : 'Falhou');
+                console.log('📊 Após remoção:', properties[propertyIndex].images.length, 'imagens');
+                
+                // SALVAR NO LOCALSTORAGE
+                localStorage.setItem('properties', JSON.stringify(properties));
+                console.log('💾 Salvo no localStorage');
+                
+                // ATUALIZAR TODOS OS DISPLAYS
+                loadProperties();
+                loadAdminProperties();
+                updateCurrentImagesDisplay(propertyId);
+                console.log('🔄 Displays atualizados');
+                
+                alert('✅ Imagem removida com sucesso!');
+                console.log('✅ REMOÇÃO CONCLUÍDA COM SUCESSO');
+                
+            } catch (error) {
+                console.error('❌ ERRO NA REMOÇÃO:', error.message);
+                console.error('📊 Estado atual:', {
+                    propertyIndex: properties.findIndex(p => p.id === propertyId),
+                    totalProperties: properties.length,
+                    imageIndex: imageIndex,
+                    imagesLength: properties.find(p => p.id === propertyId)?.images?.length || 'N/A'
+                });
+                alert(`❌ Erro ao remover imagem: ${error.message}`);
+            }
+        }
+
+        function updateCurrentImagesDisplay(propertyId) {
+            console.log('🖼️ ATUALIZANDO DISPLAY DE IMAGENS - ID:', propertyId);
+            
+            const property = properties.find(p => p.id === propertyId);
+            if (!property) {
+                console.log('❌ Propriedade não encontrada');
+                return;
+            }
+
+            console.log('📊 Propriedade encontrada:', property.title);
+            console.log('🖼️ Total de imagens:', property.images?.length || 0);
+
+            const currentImagesDiv = document.getElementById('currentImages');
+            const currentThumbnail = document.getElementById('currentThumbnail');
+            const currentImagesGrid = document.getElementById('currentImagesGrid');
+            
+            // Limpar conteúdo anterior
+            currentThumbnail.innerHTML = '';
+            currentImagesGrid.innerHTML = '';
+            
+            if (property.images && property.images.length > 0) {
+                console.log('✅ Exibindo imagens existentes');
+                currentImagesDiv.classList.remove('hidden');
+                
+                // Mostrar thumbnail (primeira imagem)
+                const thumbnailDiv = document.createElement('div');
+                thumbnailDiv.className = 'relative group';
+                thumbnailDiv.innerHTML = `
+                    <img src="${property.images[0]}" alt="Foto Principal" class="w-full h-24 object-cover rounded border-2 border-blue-500">
+                    <button type="button" onclick="removeImage(${propertyId}, 0);" 
+                            class="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 hover:scale-110 text-white rounded-full w-7 h-7 text-sm transition-all z-50 flex items-center justify-center font-bold shadow-xl border-2 border-white cursor-pointer opacity-0 group-hover:opacity-100"
+                            title="🗑️ Remover foto principal">
+                        ✕
+                    </button>
+                    <div class="absolute bottom-0 left-0 bg-blue-500 text-white text-xs px-1 rounded-tr">THUMBNAIL</div>
+                `;
+                currentThumbnail.appendChild(thumbnailDiv);
+                console.log('📸 Thumbnail exibida');
+                
+                // Mostrar galeria (demais imagens)
+                if (property.images.length > 1) {
+                    console.log('🖼️ Exibindo', property.images.length - 1, 'imagens da galeria');
+                    property.images.slice(1).forEach((img, index) => {
+                        const realIndex = index + 1; // +1 porque começamos do índice 1
+                        const imgDiv = document.createElement('div');
+                        imgDiv.className = 'relative group';
+                        imgDiv.innerHTML = `
+                            <img src="${img}" alt="Foto ${realIndex + 1}" class="w-full h-20 object-cover rounded border">
+                            <button type="button" onclick="removeImage(${propertyId}, ${realIndex});" 
+                                    class="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 hover:scale-110 text-white rounded-full w-6 h-6 text-xs transition-all z-50 flex items-center justify-center font-bold shadow-xl border-2 border-white cursor-pointer opacity-0 group-hover:opacity-100"
+                                    title="🗑️ Remover esta foto">
+                                ✕
+                            </button>
+                            <div class="absolute bottom-0 left-0 bg-gray-600 text-white text-xs px-1 rounded-tr">${realIndex}</div>
+                        `;
+                        currentImagesGrid.appendChild(imgDiv);
+                    });
+                    console.log('✅ Galeria exibida');
+                }
+            } else {
+                console.log('📭 Nenhuma imagem para exibir');
+                currentImagesDiv.classList.add('hidden');
+            }
+            
+            console.log('✅ Display de imagens atualizado');
+        }
+
+        function cancelEdit(form) {
+            console.log('❌ CANCELANDO EDIÇÃO');
+            
+            // Restaurar título do formulário
+            document.getElementById('formTitle').textContent = 'Adicionar Novo Imóvel';
+            
+            // Resetar o formulário completamente
+            form.reset();
+            document.getElementById('currentImages').classList.add('hidden');
+            
+            // Esconder previews
+            document.getElementById('thumbnailPreview').classList.add('hidden');
+            document.getElementById('galleryPreview').classList.add('hidden');
+            
+            // Limpar campos de arquivo explicitamente
+            const thumbnailInput = form.querySelector('input[name="thumbnailImage"]');
+            const galleryInput = form.querySelector('input[name="galleryImages"]');
+            if (thumbnailInput) thumbnailInput.value = '';
+            if (galleryInput) galleryInput.value = '';
+            
+            // Remover marcação de edição
+            delete form.dataset.editingId;
+            
+            // Restaurar botão original
+            const submitBtn = form.querySelector('#submitPropertyBtn');
+            submitBtn.innerHTML = '➕ Adicionar Imóvel';
+            submitBtn.className = 'w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all';
+            
+            // Remover botão cancelar
+            const cancelBtn = form.querySelector('.cancel-edit-btn');
+            if (cancelBtn) {
+                cancelBtn.remove();
+            }
+            
+            console.log('✅ Modo de edição cancelado');
+            
+            // Scroll para o topo do formulário
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function removeImageFromModal(propertyId, imageIndex) {
+            console.log('Removendo imagem do modal:', propertyId, imageIndex);
+            
+            if (confirm('Remover esta imagem?')) {
+                const propertyIndex = properties.findIndex(p => p.id === propertyId);
+                console.log('Property index no modal:', propertyIndex);
+                
+                if (propertyIndex !== -1 && properties[propertyIndex].images && properties[propertyIndex].images[imageIndex] !== undefined) {
+                    console.log('Removendo imagem do modal, índice:', imageIndex);
+                    properties[propertyIndex].images.splice(imageIndex, 1);
+                    localStorage.setItem('properties', JSON.stringify(properties));
+                    
+                    // Update current property reference
+                    currentProperty = properties[propertyIndex];
+                    
+                    // Adjust current image index if necessary
+                    if (currentImageIndex >= currentProperty.images.length) {
+                        currentImageIndex = Math.max(0, currentProperty.images.length - 1);
+                    }
+                    
+                    console.log('Imagens restantes no modal:', currentProperty.images.length);
+                    
+                    // Refresh displays
+                    loadProperties();
+                    loadAdminProperties();
+                    
+                    // Refresh modal content
+                    viewProperty(propertyId);
+                    
+                    alert('Imagem removida com sucesso!');
+                } else {
+                    console.error('Erro: Imagem não encontrada no modal');
+                    alert('Erro: Imagem não encontrada');
+                }
+            }
+        }
+
+        function updateProperty(id, formData, form) {
+            console.log('🔄 INICIANDO ATUALIZAÇÃO - ID:', id);
+            
+            const propertyIndex = properties.findIndex(p => p.id === id);
+            
+            if (propertyIndex === -1) {
+                alert('❌ Erro: Imóvel não encontrado!');
+                return;
+            }
+
+            console.log('📝 Propriedade encontrada no índice:', propertyIndex);
+
+            // Criar uma cópia limpa da propriedade existente
+            const currentProperty = JSON.parse(JSON.stringify(properties[propertyIndex]));
+            
+            // Atualizar APENAS os dados do formulário (preservar imagens existentes)
+            const updatedProperty = {
+                id: currentProperty.id,
+                title: formData.get('title'),
+                location: formData.get('location'),
+                price: formData.get('price'),
+                type: formData.get('type'),
+                transaction: formData.get('transaction'),
+                area: formData.get('area') || '',
+                bedrooms: formData.get('bedrooms') || '',
+                bathrooms: formData.get('bathrooms') || '',
+                description: formData.get('description'),
+                features: formData.get('features').split('\n').filter(f => f.trim()),
+                featured: formData.get('featured') === 'on',
+                images: [...(currentProperty.images || [])] // PRESERVAR imagens existentes
+            };
+
+            console.log('📊 Dados básicos atualizados');
+            console.log('🖼️ Imagens preservadas:', updatedProperty.images.length);
+
+            const newFiles = [];
+            
+            // Verificar nova thumbnail
+            const thumbnailFile = formData.get('thumbnailImage');
+            if (thumbnailFile && thumbnailFile.size > 0) {
+                console.log('🖼️ Nova thumbnail detectada');
+                newFiles.push({file: thumbnailFile, type: 'thumbnail'});
+            }
+
+            // Verificar novas imagens da galeria
+            const galleryFiles = formData.getAll('galleryImages');
+            if (galleryFiles && galleryFiles.length > 0) {
+                galleryFiles.forEach(file => {
+                    if (file.size > 0 && updatedProperty.images.length < 12) {
+                        console.log('🖼️ Nova imagem da galeria detectada');
+                        newFiles.push({file: file, type: 'gallery'});
+                    }
+                });
+            }
+
+            console.log('📁 Total de novos arquivos:', newFiles.length);
+
+            if (newFiles.length > 0) {
+                let processedCount = 0;
+                
+                newFiles.forEach(({file, type}) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        if (type === 'thumbnail') {
+                            // Substituir primeira imagem ou adicionar como primeira
+                            if (updatedProperty.images.length > 0) {
+                                updatedProperty.images[0] = e.target.result;
+                                console.log('🔄 Thumbnail substituída');
+                            } else {
+                                updatedProperty.images.unshift(e.target.result);
+                                console.log('➕ Thumbnail adicionada como primeira');
+                            }
+                        } else {
+                            // Adicionar à galeria se não exceder limite
+                            if (updatedProperty.images.length < 12) {
+                                updatedProperty.images.push(e.target.result);
+                                console.log('➕ Imagem adicionada à galeria');
+                            } else {
+                                console.log('⚠️ Limite de 12 imagens atingido');
+                            }
+                        }
+                        
+                        processedCount++;
+                        console.log(`📊 Processadas: ${processedCount}/${newFiles.length}`);
+                        
+                        if (processedCount === newFiles.length) {
+                            saveUpdatedProperty();
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                console.log('💾 Salvando apenas alterações de texto');
+                saveUpdatedProperty();
+            }
+
+            function saveUpdatedProperty() {
+                try {
+                    console.log('💾 SALVANDO PROPRIEDADE ATUALIZADA');
+                    console.log('📊 Total final de imagens:', updatedProperty.images.length);
+                    
+                    // Substituir o imóvel no array
+                    properties[propertyIndex] = updatedProperty;
+                    
+                    // Salvar no localStorage
+                    localStorage.setItem('properties', JSON.stringify(properties));
+                    console.log('✅ Salvo no localStorage');
+                    
+                    // Limpar campos de arquivo ANTES de atualizar displays
+                    const thumbnailInput = form.querySelector('input[name="thumbnailImage"]');
+                    const galleryInput = form.querySelector('input[name="galleryImages"]');
+                    if (thumbnailInput) {
+                        thumbnailInput.value = '';
+                        console.log('🧹 Campo thumbnail limpo');
+                    }
+                    if (galleryInput) {
+                        galleryInput.value = '';
+                        console.log('🧹 Campo galeria limpo');
+                    }
+                    
+                    // Esconder previews
+                    document.getElementById('thumbnailPreview').classList.add('hidden');
+                    document.getElementById('galleryPreview').classList.add('hidden');
+                    console.log('🧹 Previews escondidos');
+                    
+                    // Atualizar displays imediatamente
+                    loadProperties();
+                    loadAdminProperties();
+                    updateCurrentImagesDisplay(id);
+                    console.log('🔄 Todos os displays atualizados');
+                    
+                    console.log('✅ ATUALIZAÇÃO CONCLUÍDA COM SUCESSO!');
+                    alert('✅ Imóvel atualizado com sucesso!');
+                    
+                } catch (error) {
+                    console.error('❌ Erro ao salvar:', error);
+                    alert('❌ Erro ao salvar as alterações. Tente novamente.');
+                }
+            }
+        }
+
+        function duplicateProperty(id) {
+            console.log('📋 INICIANDO DUPLICAÇÃO - ID:', id);
+            
+            const property = properties.find(p => p.id === id);
+            if (!property) {
+                console.error('❌ Propriedade não encontrada para duplicação');
+                return;
+            }
+
+            console.log('📝 Propriedade encontrada:', property.title);
+
+            const duplicatedProperty = {
+                ...property,
+                id: Date.now(),
+                title: property.title + ' - Cópia',
+                featured: false, // NUNCA duplicar como destaque
+                images: [...(property.images || [])] // Clone the images array
+            };
+
+            console.log('📋 Propriedade duplicada criada:', duplicatedProperty.title);
+            console.log('⭐ Destaque (deve ser false):', duplicatedProperty.featured);
+
+            properties.push(duplicatedProperty);
+            localStorage.setItem('properties', JSON.stringify(properties));
+            
+            console.log('💾 Propriedade duplicada salva');
+            console.log('📊 Total de imóveis:', properties.length);
+            
+            loadProperties();
+            loadAdminProperties();
+            
+            console.log('✅ DUPLICAÇÃO CONCLUÍDA COM SUCESSO!');
+            alert('Imóvel duplicado com sucesso! Você pode editá-lo para fazer as alterações necessárias.');
+        }
+
+        function deleteProperty(id) {
+            if (confirm('Tem certeza que deseja excluir este imóvel?')) {
+                properties = properties.filter(p => p.id !== id);
+                localStorage.setItem('properties', JSON.stringify(properties));
+                loadProperties();
+                loadAdminProperties();
+            }
+        }
+
+        function recoverPassword() {
+            const email = prompt('Digite seu email para recuperação de senha:');
+            if (email) {
+                // Simular envio de email
+                alert(`Um email com instruções foi enviado para: ${email}\n\nPara demonstração, a senha atual é: ${ADMIN_PASSWORD}\n\nEm um sistema real, isso seria enviado por email.`);
+            }
+        }
+
+        // Contact and interaction functions
+        function scheduleVisit() {
             if (typeof fbq !== 'undefined') {
-                fbq('track', 'ViewContent', {
-                    content_name: title,
-                    content_category: type,
-                    content_type: 'property',
-                    value: parseFloat(price.replace(/[^\d,]/g, '').replace(',', '.')),
-                    currency: 'BRL'
+                fbq('track', 'Lead');
+            }
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'generate_lead', {
+                    'event_category': 'engagement'
                 });
             }
             
-            // Google Analytics tracking
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'view_item', {
-                    'event_category': 'real_estate',
-                    'event_label': title,
-                    'item_name': title,
-                    'item_category': type,
-                    'value': parseFloat(price.replace(/[^\d,]/g, '').replace(',', '.'))
-                });
-            }
+            window.open('https://wa.me/5511999999999?text=Olá Marcio! Gostaria de agendar uma visita para este imóvel.', '_blank');
         }
 
-        function trackContactClick() {
-            // Facebook Pixel tracking
+        function requestInfo() {
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead');
+            }
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'generate_lead', {
+                    'event_category': 'engagement'
+                });
+            }
+            
+            window.open('https://wa.me/5511999999999?text=Olá Marcio! Gostaria de mais informações sobre este imóvel.', '_blank');
+        }
+
+        function submitContact(event) {
+            event.preventDefault();
+            
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'Contact');
             }
-            
-            // Google Analytics tracking
             if (typeof gtag !== 'undefined') {
-                gtag('event', 'contact_click', {
-                    'event_category': 'engagement',
-                    'event_label': 'contact_button'
+                gtag('event', 'contact', {
+                    'event_category': 'engagement'
                 });
             }
             
-            // Abrir WhatsApp
-            window.open('https://wa.me/5511999999999?text=Olá! Vi um imóvel no site e gostaria de mais informações.', '_blank');
+            alert('Mensagem enviada com sucesso! Marcio entrará em contato em breve.');
+            event.target.reset();
         }
 
         function trackWhatsAppClick() {
-            // Facebook Pixel tracking
             if (typeof fbq !== 'undefined') {
-                fbq('track', 'Contact', {
-                    content_name: 'WhatsApp Contact'
-                });
+                fbq('track', 'Contact');
             }
-            
-            // Google Analytics tracking
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'whatsapp_click', {
-                    'event_category': 'engagement',
-                    'event_label': 'whatsapp_button'
+                    'event_category': 'engagement'
                 });
             }
         }
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', async function() {
-            // Verifica autenticação
-            await checkAdminLogin();
-            
-            // Check if there's a hash in URL
-            const hash = window.location.hash.substring(1).split('?')[0];
-            if (hash && ['home', 'casas', 'apartamentos', 'comercial', 'aluguel', 'venda', 'admin'].includes(hash)) {
-                showSection(hash, false);
-            } else {
-                showSection('home', false);
-            }
-            
-            // Set initial state
-            history.replaceState({ section: hash || 'home' }, '', window.location.href);
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
 
-        // Close modal when clicking outside
+        // Close modals when clicking outside
         document.getElementById('propertyModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
+
+        document.getElementById('adminLoginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAdminLogin();
+            }
+        });
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f469b7f4e9f225',t:'MTc1NTIxNjAzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
