@@ -670,48 +670,49 @@
             if (!grid) return;
 
             if (properties.length === 0) {
-                // Add sample properties if none exist
+                // Add sample properties if none exist - 1 for each transaction type
                 properties = [
                     {
                         id: 1,
-                        title: "Casa Moderna",
-                        location: "Vila Nova, São Paulo",
-                        price: "R$ 750.000",
+                        title: "Casa para Compra",
+                        location: "Vila Madalena, São Paulo",
+                        price: "R$ 850.000",
                         type: "casa",
-                        transaction: "venda",
+                        transaction: "compra",
                         bedrooms: "3 dorms",
                         bathrooms: "2 banh",
-                        area: "120m²",
-                        description: "Casa moderna com acabamentos de primeira linha, jardim e garagem para 2 carros.",
-                        features: ["Jardim privativo", "Garagem para 2 carros", "Churrasqueira", "Área de serviço"],
+                        area: "140m²",
+                        description: "Excelente casa para compra na Vila Madalena. Imóvel com ótimo acabamento, próximo ao metrô e com toda infraestrutura do bairro.",
+                        features: ["Próximo ao metrô", "Garagem para 2 carros", "Quintal", "Área gourmet", "Acabamento moderno"],
+                        featured: true,
                         images: []
                     },
                     {
                         id: 2,
-                        title: "Apartamento Central",
-                        location: "Centro, São Paulo",
-                        price: "R$ 450.000",
+                        title: "Apartamento para Venda",
+                        location: "Moema, São Paulo",
+                        price: "R$ 650.000",
                         type: "apartamento",
-                        transaction: "compra",
+                        transaction: "venda",
                         bedrooms: "2 dorms",
-                        bathrooms: "1 banh",
-                        area: "65m²",
-                        description: "Apartamento bem localizado no centro da cidade, próximo ao metrô e comércio.",
-                        features: ["Próximo ao metrô", "Portaria 24h", "Elevador", "Área de lazer"],
+                        bathrooms: "2 banh",
+                        area: "85m²",
+                        description: "Apartamento em excelente localização para venda. Prédio com área de lazer completa e segurança 24h.",
+                        features: ["Portaria 24h", "Piscina", "Academia", "Salão de festas", "2 vagas de garagem"],
                         images: []
                     },
                     {
                         id: 3,
-                        title: "Sobrado Familiar",
-                        location: "Jardim América, São Paulo",
-                        price: "R$ 2.500/mês",
-                        type: "sobrado",
+                        title: "Casa para Aluguel",
+                        location: "Perdizes, São Paulo",
+                        price: "R$ 3.200/mês",
+                        type: "casa",
                         transaction: "aluguel",
-                        bedrooms: "4 dorms",
-                        bathrooms: "3 banh",
-                        area: "180m²",
-                        description: "Sobrado espaçoso ideal para famílias, com quintal e área gourmet.",
-                        features: ["Quintal amplo", "Área gourmet", "3 vagas de garagem", "Piscina"],
+                        bedrooms: "3 dorms",
+                        bathrooms: "2 banh",
+                        area: "120m²",
+                        description: "Casa ampla para aluguel em Perdizes. Ideal para famílias, com quintal e próxima a escolas e comércio.",
+                        features: ["Quintal amplo", "Garagem coberta", "Próximo a escolas", "Área de serviço", "Churrasqueira"],
                         images: []
                     }
                 ];
@@ -721,16 +722,25 @@
             displayProperties(properties);
         }
 
-        function displayProperties(propertiesToShow) {
+        function displayProperties(propertiesToShow, showBanner = false, bannerInfo = null) {
             const grid = document.getElementById('propertiesGrid');
             if (!grid) return;
 
             grid.innerHTML = '';
 
-            // Ordenar por destaque primeiro, depois por ID (mais recentes primeiro)
+            // Adicionar banner se necessário
+            if (showBanner && bannerInfo) {
+                const banner = createCategoryBanner(bannerInfo);
+                grid.appendChild(banner);
+            }
+
+            // Ordenar: DESTAQUES primeiro, depois NÃO-DESTAQUES por ID (mais recentes primeiro)
             const sortedProperties = propertiesToShow.sort((a, b) => {
+                // Se um é destaque e outro não, destaque vem primeiro
                 if (a.featured && !b.featured) return -1;
                 if (!a.featured && b.featured) return 1;
+                
+                // Se ambos são destaques OU ambos não são destaques, ordenar por ID (mais recente primeiro)
                 return b.id - a.id;
             });
 
@@ -738,6 +748,48 @@
                 const propertyCard = createPropertyCard(property);
                 grid.appendChild(propertyCard);
             });
+        }
+
+        function createCategoryBanner(bannerInfo) {
+            const banner = document.createElement('div');
+            banner.className = 'col-span-full mb-8';
+            
+            const typeColors = {
+                'compra': 'from-blue-500 to-blue-700',
+                'venda': 'from-green-500 to-green-700', 
+                'aluguel': 'from-purple-500 to-purple-700',
+                'busca': 'from-orange-500 to-orange-700'
+            };
+            
+            const typeIcons = {
+                'compra': '🏠💰',
+                'venda': '🏡💸',
+                'aluguel': '🏠📅',
+                'busca': '🔍🏠'
+            };
+            
+            const gradient = typeColors[bannerInfo.transaction] || 'from-gray-500 to-gray-700';
+            const icon = typeIcons[bannerInfo.transaction] || '🏠';
+            
+            banner.innerHTML = `
+                <div class="bg-gradient-to-r ${gradient} text-white rounded-xl p-6 text-center shadow-xl">
+                    <div class="flex items-center justify-center space-x-3 mb-2">
+                        <span class="text-3xl">${icon}</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold capitalize">
+                            ${bannerInfo.propertyType} para ${bannerInfo.transaction}
+                        </h2>
+                        <span class="text-3xl">${icon}</span>
+                    </div>
+                    <p class="text-lg opacity-90">
+                        Encontre o ${bannerInfo.propertyType} ideal para ${bannerInfo.transaction}
+                    </p>
+                    <div class="mt-4 inline-flex items-center space-x-2 bg-white bg-opacity-20 rounded-full px-4 py-2">
+                        <span class="text-sm font-medium">${bannerInfo.count} ${bannerInfo.count === 1 ? 'imóvel encontrado' : 'imóveis encontrados'}</span>
+                    </div>
+                </div>
+            `;
+            
+            return banner;
         }
 
         function createPropertyCard(property) {
@@ -807,6 +859,8 @@
             const priceRange = document.getElementById('priceRange').value;
 
             let filtered = properties;
+            let showBanner = false;
+            let bannerInfo = null;
 
             if (type) {
                 filtered = filtered.filter(p => p.type === type);
@@ -825,7 +879,32 @@
                 });
             }
 
-            displayProperties(filtered);
+            // Criar banner se houver filtros específicos
+            if (type || transaction) {
+                showBanner = true;
+                const propertyTypeNames = {
+                    'casa': 'Casas',
+                    'apartamento': 'Apartamentos', 
+                    'terreno': 'Terrenos',
+                    'comercial': 'Imóveis Comerciais',
+                    'chacara': 'Chácaras',
+                    'sobrado': 'Sobrados'
+                };
+                
+                bannerInfo = {
+                    transaction: transaction || 'busca',
+                    propertyType: type ? propertyTypeNames[type] : 'Imóveis',
+                    count: filtered.length
+                };
+            }
+
+            displayProperties(filtered, showBanner, bannerInfo);
+
+            // Scroll suave para a seção de propriedades
+            document.getElementById('properties').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
 
             // Track search
             if (typeof fbq !== 'undefined') {
@@ -840,7 +919,21 @@
 
         function filterProperties(transaction) {
             const filtered = properties.filter(p => p.transaction === transaction);
-            displayProperties(filtered);
+            
+            // Criar informações do banner
+            const bannerInfo = {
+                transaction: transaction,
+                propertyType: 'Imóveis', // Genérico quando não sabemos o tipo específico
+                count: filtered.length
+            };
+            
+            displayProperties(filtered, true, bannerInfo);
+            
+            // Scroll suave para a seção de propriedades
+            document.getElementById('properties').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
         }
 
         // Mobile menu functions
@@ -2007,5 +2100,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f4d7f722b44b4c',t:'MTc1NTIyMDU1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f4ef5710e54b4c',t:'MTc1NTIyMTUxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
