@@ -1367,49 +1367,73 @@
             console.log('📁 Total de arquivos para processar:', allFiles.length);
 
             if (allFiles.length > 0) {
-                let processedCount = 0;
-                
-                allFiles.forEach((file, index) => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        newProperty.images.push(e.target.result);
-                        processedCount++;
-                        console.log(`📊 Imagem processada: ${processedCount}/${allFiles.length}`);
-                        
-                        if (processedCount === allFiles.length) {
-                            saveProperty();
-                        }
-                    };
-                    reader.readAsDataURL(file);
+                // USAR PROMISE.ALL PARA PROCESSAR TODAS AS IMAGENS
+                const imagePromises = allFiles.map((file, index) => {
+                    return new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            resolve(e.target.result);
+                        };
+                        reader.onerror = function(error) {
+                            console.error('❌ Erro ao ler arquivo:', error);
+                            reject(error);
+                        };
+                        reader.readAsDataURL(file);
+                    });
                 });
+
+                Promise.all(imagePromises)
+                    .then(results => {
+                        console.log('📊 Todas as imagens processadas:', results.length);
+                        newProperty.images = results;
+                        saveProperty();
+                    })
+                    .catch(error => {
+                        console.error('❌ Erro ao processar imagens:', error);
+                        alert('❌ Erro ao processar as imagens. Tente novamente.');
+                    });
             } else {
                 console.log('💾 Salvando sem imagens');
                 saveProperty();
             }
 
             function saveProperty() {
-                console.log('💾 SALVANDO NOVO IMÓVEL');
-                
-                properties.push(newProperty);
-                localStorage.setItem('properties', JSON.stringify(properties));
-                
-                console.log('✅ Imóvel salvo no localStorage');
-                console.log('📊 Total de imóveis:', properties.length);
-                
-                // Forçar atualização da página
-                loadProperties();
-                loadAdminProperties();
-                
-                console.log('🔄 Displays atualizados');
-                
-                form.reset();
-                
-                // Esconder previews após salvar
-                document.getElementById('thumbnailPreview').classList.add('hidden');
-                document.getElementById('galleryPreview').classList.add('hidden');
-                
-                console.log('✅ NOVO IMÓVEL ADICIONADO COM SUCESSO!');
-                alert('Imóvel adicionado com sucesso!');
+                try {
+                    console.log('💾 SALVANDO NOVO IMÓVEL');
+                    
+                    properties.push(newProperty);
+                    
+                    // Salvar no localStorage com verificação
+                    try {
+                        localStorage.setItem('properties', JSON.stringify(properties));
+                        console.log('✅ Imóvel salvo no localStorage');
+                    } catch (storageError) {
+                        console.error('❌ Erro no localStorage:', storageError);
+                        throw new Error('Erro ao salvar no navegador. Talvez as imagens sejam muito grandes.');
+                    }
+                    
+                    console.log('📊 Total de imóveis:', properties.length);
+                    
+                    // Usar setTimeout para garantir que a UI seja atualizada
+                    setTimeout(() => {
+                        loadProperties();
+                        loadAdminProperties();
+                        console.log('🔄 Displays atualizados');
+                        
+                        form.reset();
+                        
+                        // Esconder previews após salvar
+                        document.getElementById('thumbnailPreview').classList.add('hidden');
+                        document.getElementById('galleryPreview').classList.add('hidden');
+                        
+                        console.log('✅ NOVO IMÓVEL ADICIONADO COM SUCESSO!');
+                        alert('✅ Imóvel adicionado com sucesso!');
+                    }, 100);
+                    
+                } catch (error) {
+                    console.error('❌ Erro ao salvar:', error);
+                    alert(`❌ Erro ao salvar: ${error.message}`);
+                }
             }
         }
 
@@ -1733,7 +1757,7 @@
             const galleryFiles = formData.getAll('galleryImages');
             if (galleryFiles && galleryFiles.length > 0) {
                 galleryFiles.forEach(file => {
-                    if (file.size > 0 && updatedProperty.images.length < 12) {
+                    if (file.size > 0) {
                         console.log('🖼️ Nova imagem da galeria detectada');
                         newFiles.push({file: file, type: 'gallery'});
                     }
@@ -1743,39 +1767,56 @@
             console.log('📁 Total de novos arquivos:', newFiles.length);
 
             if (newFiles.length > 0) {
-                let processedCount = 0;
-                
-                newFiles.forEach(({file, type}) => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        if (type === 'thumbnail') {
-                            // Substituir primeira imagem ou adicionar como primeira
-                            if (updatedProperty.images.length > 0) {
-                                updatedProperty.images[0] = e.target.result;
-                                console.log('🔄 Thumbnail substituída');
-                            } else {
-                                updatedProperty.images.unshift(e.target.result);
-                                console.log('➕ Thumbnail adicionada como primeira');
-                            }
-                        } else {
-                            // Adicionar à galeria se não exceder limite
-                            if (updatedProperty.images.length < 12) {
-                                updatedProperty.images.push(e.target.result);
-                                console.log('➕ Imagem adicionada à galeria');
-                            } else {
-                                console.log('⚠️ Limite de 12 imagens atingido');
-                            }
-                        }
-                        
-                        processedCount++;
-                        console.log(`📊 Processadas: ${processedCount}/${newFiles.length}`);
-                        
-                        if (processedCount === newFiles.length) {
-                            saveUpdatedProperty();
-                        }
-                    };
-                    reader.readAsDataURL(file);
+                // USAR PROMISE.ALL PARA PROCESSAR TODAS AS IMAGENS DE UMA VEZ
+                const imagePromises = newFiles.map(({file, type}) => {
+                    return new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            resolve({
+                                data: e.target.result,
+                                type: type
+                            });
+                        };
+                        reader.onerror = function(error) {
+                            console.error('❌ Erro ao ler arquivo:', error);
+                            reject(error);
+                        };
+                        reader.readAsDataURL(file);
+                    });
                 });
+
+                Promise.all(imagePromises)
+                    .then(results => {
+                        console.log('📊 Todas as imagens processadas:', results.length);
+                        
+                        // Processar resultados em ordem
+                        results.forEach(({data, type}) => {
+                            if (type === 'thumbnail') {
+                                // Substituir primeira imagem ou adicionar como primeira
+                                if (updatedProperty.images.length > 0) {
+                                    updatedProperty.images[0] = data;
+                                    console.log('🔄 Thumbnail substituída');
+                                } else {
+                                    updatedProperty.images.unshift(data);
+                                    console.log('➕ Thumbnail adicionada como primeira');
+                                }
+                            } else {
+                                // Adicionar à galeria se não exceder limite
+                                if (updatedProperty.images.length < 12) {
+                                    updatedProperty.images.push(data);
+                                    console.log('➕ Imagem adicionada à galeria');
+                                } else {
+                                    console.log('⚠️ Limite de 12 imagens atingido');
+                                }
+                            }
+                        });
+                        
+                        saveUpdatedProperty();
+                    })
+                    .catch(error => {
+                        console.error('❌ Erro ao processar imagens:', error);
+                        alert('❌ Erro ao processar as imagens. Tente novamente.');
+                    });
             } else {
                 console.log('💾 Salvando apenas alterações de texto');
                 saveUpdatedProperty();
@@ -1789,9 +1830,14 @@
                     // Substituir o imóvel no array
                     properties[propertyIndex] = updatedProperty;
                     
-                    // Salvar no localStorage
-                    localStorage.setItem('properties', JSON.stringify(properties));
-                    console.log('✅ Salvo no localStorage');
+                    // Salvar no localStorage com verificação
+                    try {
+                        localStorage.setItem('properties', JSON.stringify(properties));
+                        console.log('✅ Salvo no localStorage');
+                    } catch (storageError) {
+                        console.error('❌ Erro no localStorage:', storageError);
+                        throw new Error('Erro ao salvar no navegador. Talvez as imagens sejam muito grandes.');
+                    }
                     
                     // Limpar campos de arquivo ANTES de atualizar displays
                     const thumbnailInput = form.querySelector('input[name="thumbnailImage"]');
@@ -1810,18 +1856,20 @@
                     document.getElementById('galleryPreview').classList.add('hidden');
                     console.log('🧹 Previews escondidos');
                     
-                    // Atualizar displays imediatamente
-                    loadProperties();
-                    loadAdminProperties();
-                    updateCurrentImagesDisplay(id);
-                    console.log('🔄 Todos os displays atualizados');
-                    
-                    console.log('✅ ATUALIZAÇÃO CONCLUÍDA COM SUCESSO!');
-                    alert('✅ Imóvel atualizado com sucesso!');
+                    // Usar setTimeout para garantir que a UI seja atualizada
+                    setTimeout(() => {
+                        loadProperties();
+                        loadAdminProperties();
+                        updateCurrentImagesDisplay(id);
+                        console.log('🔄 Todos os displays atualizados');
+                        
+                        console.log('✅ ATUALIZAÇÃO CONCLUÍDA COM SUCESSO!');
+                        alert('✅ Imóvel atualizado com sucesso!');
+                    }, 100);
                     
                 } catch (error) {
                     console.error('❌ Erro ao salvar:', error);
-                    alert('❌ Erro ao salvar as alterações. Tente novamente.');
+                    alert(`❌ Erro ao salvar: ${error.message}`);
                 }
             }
         }
@@ -1959,5 +2007,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f469b7f4e9f225',t:'MTc1NTIxNjAzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f4d7f722b44b4c',t:'MTc1NTIyMDU1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
